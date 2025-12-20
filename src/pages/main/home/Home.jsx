@@ -1,4 +1,5 @@
 import HomeHero from "@/components/homes/HomeHero";
+import Perticipate from "@/components/homes/Perticipate";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
@@ -11,6 +12,7 @@ const Home = () => {
 
       <div>
         <HomeHero />
+        <Perticipate />
       </div>
     </>
   );
