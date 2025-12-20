@@ -5,9 +5,10 @@ const HomeHero = () => {
   return (
     <>
       <div>
-        {/* here i want to make the img bg img so write necessary css  i wan tto use img bg tailwind formate i importd the img */}
+        {/* here i want to make the img bg img so write necessary css */}
         <div
-          className={`bg-cover bg-center h-276 max-h-screen w-full bg-[url(${HeroBg})]`}
+          className="bg-cover bg-center h-276 max-h-screen w-full"
+          style={{ backgroundImage: `url(${HeroBg})` }}
         >
           <div className="flex flex-col items-center justify-center h-full text-center pt-20 space-y-6 position-relative -ml-300">
             <h1 className="text-8xl font-light text-(--color-all) leading-tight mb-10 tracking-tight text-start">
