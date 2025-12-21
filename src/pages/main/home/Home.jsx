@@ -1,5 +1,7 @@
 import AwardsPrizes from "@/components/homes/AwardsPrizes";
+import CategorySlider from "@/components/homes/CategorySlider";
 import HomeHero from "@/components/homes/HomeHero";
+import HowitWork from "@/components/homes/HowitWork";
 import InstagramFeed from "@/components/homes/InstagramFeed";
 import Perticipate from "@/components/homes/Perticipate";
 import React from "react";
@@ -17,6 +19,8 @@ const Home = () => {
         <Perticipate />
         <AwardsPrizes />
         <InstagramFeed />
+        <CategorySlider />
+        <HowitWork />
       </div>
     </>
   );
