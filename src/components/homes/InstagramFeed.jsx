@@ -75,7 +75,7 @@ const InstagramFeed = () => {
           {posts.map((post) => (
             <Card
               key={post.id}
-              className="group relative overflow-hidden rounded-xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className=" p-0 roup relative overflow-hidden rounded-xl border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
               <div className="relative aspect-square overflow-hidden">
                 <img
