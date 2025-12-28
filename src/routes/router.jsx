@@ -9,11 +9,12 @@ import About from "@/pages/main/About/About";
 import MegazinePage from "@/pages/main/Magazine/MegazinePage";
 import MagazineDetails from "@/pages/main/Magazine/MagazineDetails";
 import FAQPage from "@/pages/main/Faq/FAQPage";
-
+import HowitWork from "@/pages/main/howitwork/HowitWork";
+import Contest from "@/pages/main/contest/Contest";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout />,
     children: [
       {
@@ -25,35 +26,43 @@ export const router = createBrowserRouter([
       //   //element: <About />,
       // },
       {
-        path: 'categories',
+        path: "categories",
         element: <Categorie />,
       },
       {
-        path: 'manifestos',
+        path: "manifestos",
         element: <Manifesto />,
       },
       {
-        path: 'winner',
+        path: "winner",
         element: <Winner />,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About />,
       },
       {
-        path: 'megazine',
+        path: "howitwork",
+        element: <HowitWork />,
+      },
+      {
+        path: "contest",
+        element: <Contest />,
+      },
+      {
+        path: "megazine",
         element: <MegazinePage />,
       },
       {
-  path: 'megazine/:id',
-  element: <MagazineDetails />,
-},
+        path: "megazine/:id",
+        element: <MagazineDetails />,
+      },
       {
-  path: 'faq',
-  element: <FAQPage />,
-},
+        path: "faq",
+        element: <FAQPage />,
+      },
       {
-        path: '*',
+        path: "*",
         element: <NotFound />,
       },
     ],
