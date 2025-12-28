@@ -8,6 +8,8 @@ import Winner from "@/pages/main/winner/Winner";
 import AboutPage from "@/pages/main/About/About";
 import About from "@/pages/main/About/About";
 import Contest from "@/pages/main/contest/Contest";
+import HowitWork from "@/pages/main/howitwork/HowitWork";
+import SubmitPhotoForm from "@/components/SubmitPhotoForm";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,8 @@ export const router = createBrowserRouter([
         path: "contest",
         element: <Contest />,
       },
+      { path: "howitwork", element: <HowitWork /> },
+      { path: "submit-photo", element: <SubmitPhotoForm /> },
       {
         path: "*",
         element: <NotFound />,
