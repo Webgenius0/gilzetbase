@@ -1,4 +1,5 @@
 import React from 'react';
+import founderImg from '../../../assets/video/founder.jpg'
 
 // --- Utility Components for consistent styling ---
 const SectionWrapper = ({ children, className = '' }) => (
@@ -30,7 +31,7 @@ const AboutHero = () => (
           creative expression, and contemporary storytelling.
         </p>
       </div>
-      <div className="md:w-1/3 border border-gray-200 p-8 rounded-xl bg-white shadow-sm ">
+      <div className="md:w-1/3   border-[rgba(202,168,68,0.39)] bg-[#FFF] [box-shadow:-3px_2px_4px_0_rgba(0,_0,_0,_0.13)] p-8 rounded-xl  ">
         <p className="text-[#565E69] font-[Inter] text-[14px] not-italic font-normal leading-[normal] mb-4">
           A Global Editorial Stage
         </p>
@@ -59,31 +60,36 @@ const AboutAVA = () => (
       <h2 className="text-3xl font-serif mb-6 Georgia">Art Vision Awards</h2>
       <div className="space-y-4 text-[#565E69] font-[Inter] text-[15px] md:text-[16px] not-italic font-normal leading-6 tracking-[0.16px] ">
         <p>
-          The Art Vision Awards (AVA) stands as a beacon for creative minds
-          globally. Founded on the principle of recognizing raw talent and
-          refined craftsmanship, AVA provides a stage where imagery transcends
-          the lens to tell stories that matter.
+          Art Vision Awards (AVA) is a leading international platform dedicated
+          to celebrating photography, fashion imagery, and visual storytelling
+          across the globe. Conceived for artists, image-makers, and creative
+          teams working at the highest level, AVA highlights work that is
+          conceptually strong, emotionally resonant, and visually iconic.
         </p>
         <p>
-          Our jurors comprise some of the most influential voices in the
-          industry, ensuring that every submission is evaluated with technical
-          precision and artistic sensitivity.
+          Born from the intersection of editorial culture, luxury aesthetics,
+          and cutting-edge creative direction, AVA exists to spotlight the most
+          compelling voices shaping how we see style, identity, and contemporary
+          life. Each edition connects emerging and established talents with a
+          discerning global audience, fostering recognition, collaboration, and
+          long-term relevance in today's fast-moving visual culture.
         </p>
       </div>
     </div>
     <div className="md:w-1/3">
       <p className="text-sm font-medium mb-4">Founder</p>
-      <div className="border border-gray-100 rounded-2xl p-6 flex items-start gap-4 bg-white shadow-sm">
+      <div className="border border-[#CAA844] rounded-2xl p-6 flex items-center justify-center gap-4 bg-white shadow-sm">
         <img
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+          src={founderImg}
           alt="Founder"
-          className="w-20 h-20 rounded-lg object-cover grayscale"
+          className="w-34 h-32 rounded-lg object-cover grayscale"
         />
         <div>
-          <h4 className="font-bold text-gray-900">Founded by Gil Zerbaze</h4>
+          <h4 className="font-bold text-gray-900">Founded by Gil Zetbase</h4>
           <p className="text-xs text-gray-500 mt-2 leading-tight">
-            Photographer and Creative Director with a vision to unify the global
-            artistic community.
+            Photographer, art director and creative consultant, AVA highlights
+            the world’s most visionary artists whose images embody beauty,
+            innovation, and emotion.
           </p>
         </div>
       </div>
@@ -94,7 +100,7 @@ const AboutAVA = () => (
 // --- 3. Location ---
 const Location = () => (
   <div className="px-6 ">
-    <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative h-[400px] flex items-center px-12 ">
+    <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden relative h-[328px] flex items-center px-12 ">
       <img
         src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=2000"
         className="absolute inset-0 w-full h-full object-cover opacity-60"
@@ -262,7 +268,7 @@ const PhotoCompetition = () => (
         alt="Gallery 1"
       />
       <img
-        src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=400&h=500&fit=crop"
+        src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80"
         className="w-1/2 h-64 object-cover rounded-xl mt-8"
         alt="Gallery 2"
       />

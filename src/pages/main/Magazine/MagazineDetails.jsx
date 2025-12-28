@@ -1,4 +1,5 @@
 import React from 'react';
+import heroBg from '../../../assets/video/blogDetails bg.png';
 
 const MagazineDetails = () => {
   // Sample popular articles
@@ -21,15 +22,15 @@ const MagazineDetails = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-[250px] md:h-[300px] lg:h-[350px] overflow-hidden">
+      <div className="relative h-[250px] md:h-[350px] lg:h-[450px] overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&q=80"
+          src={heroBg}
           alt="Article Hero"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+        <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-4xl">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif mb-3">
+            <h1 className="text-4xl Playfair md:text-5xl lg:text-6xl font-bold tracking-wider mb-3 text-[#FEFEFE]">
               The Art of Storytelling Through Style
             </h1>
             <p className="text-sm md:text-base tracking-wide">
@@ -49,7 +50,7 @@ const MagazineDetails = () => {
             </h2>
 
             {/* Featured Image */}
-            <div className="mb-8 rounded-lg overflow-hidden">
+            <div className="mb-8 rounded-lg overflow-hidden h-[250px] md:h-[350px] lg:h-[550px]">
               <img
                 src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=1200&q=80"
                 alt="Fashion Photography"
