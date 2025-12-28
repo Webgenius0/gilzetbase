@@ -118,11 +118,23 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+<<<<<<< HEAD
 .font-playfair {
   font-family: "Playfair Display", serif;
 }
+=======
+body {
+  font-family: "Inter", sans-serif;
+
+}
+
+.Georgia {
+  font-family: "Gelasio", serif;
+}
+>>>>>>> 8430664297eb1d018449c945a038ee1b5ac43105
