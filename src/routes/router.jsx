@@ -8,6 +8,7 @@ import Winner from "@/pages/main/winner/Winner";
 import About from "@/pages/main/About/About";
 import MegazinePage from "@/pages/main/Magazine/MegazinePage";
 import MagazineDetails from "@/pages/main/Magazine/MagazineDetails";
+import FAQPage from "@/pages/main/Faq/FAQPage";
 
 
 export const router = createBrowserRouter([
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
   path: 'megazine/:id',
   element: <MagazineDetails />,
+},
+      {
+  path: 'faq',
+  element: <FAQPage />,
 },
       {
         path: '*',
