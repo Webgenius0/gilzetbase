@@ -7,9 +7,10 @@ import Manifesto from "@/pages/main/manifesto/Manifesto";
 import Winner from "@/pages/main/winner/Winner";
 import AboutPage from "@/pages/main/About/About";
 import About from "@/pages/main/About/About";
+import Contest from "@/pages/main/contest/Contest";
 
 export const router = createBrowserRouter([
-   {
+  {
     path: "/",
     element: <RootLayout />,
     children: [
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "contest",
+        element: <Contest />,
       },
       {
         path: "*",

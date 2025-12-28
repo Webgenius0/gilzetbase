@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import image from "../../../src/assets/winner/winner-bg.png";
-import CountdownBox from "./CountdownBox";
+import image from "../../../src/assets/contest/contest-bg.png";
+import CountdownBox from "../winners/CountdownBox";
 
-const WinnerHero = () => {
+const ContestHero = () => {
   const title = "Awards 2026";
   const subtitle = "Global Design Excellence";
   const description = "Shape the future of digital experiences.";
@@ -75,4 +75,4 @@ const WinnerHero = () => {
   );
 };
 
-export default WinnerHero;
+export default ContestHero;
