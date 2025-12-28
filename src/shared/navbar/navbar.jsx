@@ -19,7 +19,7 @@ const navLinks = [
   { name: "Winners", path: "/winner" },
   { name: "How It Works", path: "/howitwork" },
   { name: "Contest", path: "/contest" },
-  { name: "Magazine", path: "/magazine" },
+  { name: "Megazine", path: "/megazine" },
   { name: "Manifesto", path: "/manifestos" },
   { name: "About", path: "/about" },
 ];
