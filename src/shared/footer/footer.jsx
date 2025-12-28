@@ -12,7 +12,7 @@ const Footer = () => {
     column2: [
       { name: "Terms", href: "#" },
       { name: "Privacy", href: "#" },
-      { name: "FAQ", href: "#" },
+      { name: "FAQ", href: "/faq" },
     ],
   };
 
