@@ -6,6 +6,7 @@ import { createBrowserRouter } from "react-router";
 import Manifesto from "@/pages/main/manifesto/Manifesto";
 import Winner from "@/pages/main/winner/Winner";
 import About from "@/pages/main/About/About";
+<<<<<<< HEAD
 import MegazinePage from "@/pages/main/Magazine/MegazinePage";
 import MagazineDetails from "@/pages/main/Magazine/MagazineDetails";
 
@@ -13,6 +14,15 @@ import MagazineDetails from "@/pages/main/Magazine/MagazineDetails";
 export const router = createBrowserRouter([
   {
     path: '/',
+=======
+import Contest from "@/pages/main/contest/Contest";
+import HowitWork from "@/pages/main/howitwork/HowitWork";
+import SubmitPhotoForm from "@/components/SubmitPhotoForm";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+>>>>>>> 77ce2e04621c18d47e519c180437b710f8809e9b
     element: <RootLayout />,
     children: [
       {
@@ -40,6 +50,7 @@ export const router = createBrowserRouter([
         element: <About />,
       },
       {
+<<<<<<< HEAD
         path: 'megazine',
         element: <MegazinePage />,
       },
@@ -49,6 +60,15 @@ export const router = createBrowserRouter([
 },
       {
         path: '*',
+=======
+        path: "contest",
+        element: <Contest />,
+      },
+      { path: "howitwork", element: <HowitWork /> },
+      { path: "submit-photo", element: <SubmitPhotoForm /> },
+      {
+        path: "*",
+>>>>>>> 77ce2e04621c18d47e519c180437b710f8809e9b
         element: <NotFound />,
       },
     ],

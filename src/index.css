@@ -124,6 +124,11 @@
   }
 }
 
+
+.font-playfair {
+  font-family: "Playfair Display", serif;
+}
+
 body {
   font-family: "Inter", sans-serif;
 
@@ -132,6 +137,7 @@ body {
 .Georgia {
   font-family: "Gelasio", serif;
 }
+
 
 .Playfair {
   font-family: "Playfair Display", serif;
