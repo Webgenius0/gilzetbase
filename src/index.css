@@ -118,7 +118,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+body {
+  font-family: "Inter", sans-serif;
+
+}
+
+.Georgia {
+  font-family: "Gelasio", serif;
 }
