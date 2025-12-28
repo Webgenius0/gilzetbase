@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -49,9 +49,11 @@ export default function Navbar() {
 
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center space-x-3">
-          <Button className="bg-yellow-600 hover:bg-yellow-700 text-black">
-            Submit a Photo
-          </Button>
+          <Link to="/submit-photo">
+            <Button className="bg-yellow-600 hover:bg-yellow-700 text-black">
+              Submit a Photo
+            </Button>
+          </Link>
 
           <Button variant="outline" className="border-gray-600 text-gray-300">
             Create an account
