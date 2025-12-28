@@ -205,27 +205,30 @@ const WhyArt = () => {
 // --- 6. OurCoreValues ---
 const OurCoreValues = () => {
   const values = [
-    { title: 'Vision', desc: 'Fostering an environment of creative freedom.' },
+    {
+      title: 'Vision',
+      desc: 'Showcasing innovative perspectives that influence tomorrow’s artistic direction.',
+    },
     {
       title: 'Emotion',
-      desc: 'Valuing art that moves the soul and sparks conversation.',
+      desc: 'Celebrating powerful visual storytelling that connects creators and audiences across cultures.',
     },
     {
       title: 'Global',
-      desc: 'Bridging cultures through a universal visual language.',
+      desc: 'Uniting artists from every country and building a dynamic international creative network.',
     },
     {
-      title: 'Styling',
-      desc: 'Excellence in presentation and aesthetic detail.',
+      title: 'Excellence',
+      desc: 'Maintaining the highest standards in photography, fashion imagery, and visual creation.',
     },
   ];
   return (
-    <SectionWrapper className="bg-gray-50">
+    <SectionWrapper className="">
       <GoldSubheading>Why AVA</GoldSubheading>
       <h2 className="text-3xl font-serif mb-12">Our Core Values</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {values.map((v, i) => (
-          <div key={i} className="p-6 border-l-2 border-[#C5A059] bg-white">
+          <div key={i} className="p-6 border border-[#D1D5DB] bg-[#F7F7F8] rounded-[16px]">
             <h4 className="font-bold mb-2">{v.title}</h4>
             <p className="text-[#565E69] font-[Inter] text-[15px] md:text-[16px] not-italic font-normal leading-[normal]">
               {v.desc}

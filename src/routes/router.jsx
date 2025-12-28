@@ -5,16 +5,18 @@ import Home from "@/pages/main/home/Home";
 import { createBrowserRouter } from "react-router";
 import Manifesto from "@/pages/main/manifesto/Manifesto";
 import Winner from "@/pages/main/winner/Winner";
-import AboutPage from "@/pages/main/About/About";
 import About from "@/pages/main/About/About";
+import MegazinePage from "@/pages/main/Magazine/MegazinePage";
+import MagazineDetails from "@/pages/main/Magazine/MagazineDetails";
+
 
 export const router = createBrowserRouter([
-   {
-    path: "/",
+  {
+    path: '/',
     element: <RootLayout />,
     children: [
       {
-        index: true, //  means "/"
+        index: true,
         element: <Home />,
       },
       // {
@@ -22,23 +24,31 @@ export const router = createBrowserRouter([
       //   //element: <About />,
       // },
       {
-        path: "categories",
+        path: 'categories',
         element: <Categorie />,
       },
       {
-        path: "manifestos",
+        path: 'manifestos',
         element: <Manifesto />,
       },
       {
-        path: "winner",
+        path: 'winner',
         element: <Winner />,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <About />,
       },
       {
-        path: "*",
+        path: 'megazine',
+        element: <MegazinePage />,
+      },
+      {
+  path: 'megazine/:id',
+  element: <MagazineDetails />,
+},
+      {
+        path: '*',
         element: <NotFound />,
       },
     ],

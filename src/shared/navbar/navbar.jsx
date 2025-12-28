@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Categories", path: "/categories" },
-  { name: "Winners", path: "/winner" },
-  { name: "How It Works", path: "/how-it-works" },
-  { name: "Contest", path: "/contest" },
-  { name: "Magazine", path: "/magazine" },
-  { name: "Manifesto", path: "/manifestos" },
-  { name: "About", path: "/about" },
+  { name: 'Home', path: '/' },
+  { name: 'Categories', path: '/categories' },
+  { name: 'Winners', path: '/winner' },
+  { name: 'How It Works', path: '/how-it-works' },
+  { name: 'Contest', path: '/contest' },
+  { name: 'megazine', path: '/megazine' },
+  { name: 'Manifesto', path: '/manifestos' },
+  { name: 'About', path: '/about' },
 ];
 
 export default function Navbar() {
