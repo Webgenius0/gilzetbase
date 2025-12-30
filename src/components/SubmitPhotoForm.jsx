@@ -24,7 +24,7 @@ const SubmitPhotoForm = () => {
 
   return (
     <div className="w-full min-h-screen bg-white py-12">
-      <div className="max-w-2xl mx-auto px-6">
+      <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
           <p className="text-sm text-gray-600 mb-2">Awards 2026</p>
