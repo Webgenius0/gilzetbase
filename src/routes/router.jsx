@@ -18,6 +18,10 @@ import Contest from "@/pages/main/contest/Contest";
 
 // Dashboard pages
 import Account from "@/pages/dashboard/Account";
+import MySubmissions from "@/pages/dashboard/MySubmissions";
+import SubmissionDetails from "@/pages/dashboard/SubmissionDetails";
+import SubscriptionPlanPage from "@/pages/dashboard/SubscriptionPlanPage";
+import ProfileSettingsPage from "@/pages/dashboard/ProfileSettingsPage";
 
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
@@ -43,10 +47,24 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      { index: true, element: <Account /> },
-      { path: "account", element: <Account /> },
-      // { path: "submissions", element: <Submissions /> },
-      // { path: "participation", element: <Participation /> },
+      // Default route → /dashboard
+      { index: true, element: <MySubmissions /> },
+
+      // Submission details
+      { path: "submissions/:id", element: <SubmissionDetails /> },
+
+      // Subscription
+      { path: "subscription", element: <SubscriptionPlanPage /> },
+
+      // Account group
+      {
+        path: "account",
+        children: [
+          { index: true, element: <Account /> }, // /dashboard/account
+          { path: "profile", element: <ProfileSettingsPage /> }, // /dashboard/account/profile
+          // { path: "password", element: <PasswordPage /> }, // /dashboard/account/password
+        ],
+      },
     ],
   },
 
