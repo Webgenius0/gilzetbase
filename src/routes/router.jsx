@@ -23,6 +23,7 @@ import SubmissionDetails from "@/pages/dashboard/SubmissionDetails";
 import SubscriptionPlanPage from "@/pages/dashboard/SubscriptionPlanPage";
 import ProfileSettingsPage from "@/pages/dashboard/ProfileSettingsPage";
 import SubmitPhotoForm from "@/components/SubmitPhotoForm";
+import PasswordSettings from "@/pages/dashboard/ChangesPassword";
 
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
@@ -64,7 +65,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Account /> }, // /dashboard/account
           { path: "profile", element: <ProfileSettingsPage /> }, // /dashboard/account/profile
-          // { path: "password", element: <PasswordPage /> }, // /dashboard/account/password
+          { path: "password", element: <PasswordSettings /> }, // /dashboard/account/password
         ],
       },
     ],
