@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Upload } from "lucide-react";
 
 const SubmitPhotoForm = () => {
   const [fileName, setFileName] = useState("");
@@ -23,248 +22,212 @@ const SubmitPhotoForm = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white py-12">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-sm text-gray-600 mb-2">Awards 2026</p>
-          <h1 className="text-3xl md:text-4xl font-normal text-gray-900 mb-2">
-            Global Design Excellence
-          </h1>
-          <p className="text-xs text-gray-500">
-            Shape the future of digital experiences
+    <div className="w-full min-h-screen bg-white py-20 font-sans text-[#1a1a1a]">
+      {/* Page Header */}
+      <div className="text-center mb-16 space-y-1">
+        <p className="text-xl font-serif italic text-gray-800">Awards 2026</p>
+        <h1 className="text-3xl md:text-4xl font-serif font-medium tracking-tight">
+          Global Design Excellence
+        </h1>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-light">
+          Shape the future of digital experiences.
+        </p>
+      </div>
+
+      {/* Form Container */}
+      <div className="max-w-3xl mx-auto border border-gray-100 rounded-lg shadow-sm p-8 md:p-16">
+        <div className="mb-10">
+          <h2 className="text-2xl font-serif mb-1">Submit Your Photo</h2>
+          <p className="text-[10px] text-gray-400">
+            Fields marked with <span className="text-red-500">*</span> are
+            required.
           </p>
         </div>
 
-        {/* Form */}
-        <div className="space-y-8">
-          {/* Submit Your Photo Section */}
-          <div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              Submit Your Photo
-            </h2>
-
-            {/* Personal Information */}
-            <div className="space-y-6 mb-8">
-              <h3 className="text-base font-semibold text-gray-900">
-                Personal Information
-              </h3>
-
-              <div className="space-y-2">
-                <Label htmlFor="fullname" className="text-sm font-medium">
-                  Full name <span className="text-red-500">*</span>
+        <div className="space-y-12">
+          {/* Section: Personal Info */}
+          <section>
+            <h3 className="text-lg font-serif border-b border-gray-100 pb-2 mb-6">
+              Personal Information
+            </h3>
+            <div className="space-y-5">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
+                  Full Name <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="fullname"
                   placeholder="Enter your full name"
-                  className="w-full"
+                  className="rounded-sm border-gray-200 focus:ring-0 focus:border-gray-400"
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
                   Email <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="name@email.com"
-                  className="w-full"
+                  placeholder="name@example.com"
+                  className="rounded-sm border-gray-200"
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="country" className="text-sm font-medium">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
                   Country <span className="text-red-500">*</span>
                 </Label>
                 <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a country" />
+                  <SelectTrigger className="rounded-sm border-gray-200">
+                    <SelectValue placeholder="Select your country" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="us">United States</SelectItem>
-                    <SelectItem value="uk">United Kingdom</SelectItem>
-                    <SelectItem value="ca">Canada</SelectItem>
-                    <SelectItem value="au">Australia</SelectItem>
-                    <SelectItem value="de">Germany</SelectItem>
+                    <SelectItem value="it">Italy</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
+          </section>
 
-            {/* Photo Information */}
-            <div className="space-y-6">
-              <h3 className="text-base font-semibold text-gray-900">
-                Photo Information
-              </h3>
-
-              <div className="space-y-2">
-                <Label htmlFor="category" className="text-sm font-medium">
-                  Choose Category <span className="text-red-500">*</span>
+          {/* Section: Photo Info */}
+          <section>
+            <h3 className="text-lg font-serif border-b border-gray-100 pb-2 mb-6">
+              Photo Information
+            </h3>
+            <div className="space-y-5">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
+                  Chosen Category <span className="text-red-500">*</span>
                 </Label>
                 <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a category" />
+                  <SelectTrigger className="rounded-sm border-gray-200">
+                    <SelectValue placeholder="Select your category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="fashion">Fashion Photography</SelectItem>
-                    <SelectItem value="beauty">Beauty & Make-Up</SelectItem>
-                    <SelectItem value="models">
-                      Models / Hair / Styling
-                    </SelectItem>
+                    <SelectItem value="libre">Libre Art</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="title" className="text-sm font-medium">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
                   Photo Title <span className="text-red-500">*</span>
                 </Label>
                 <Input
-                  id="title"
-                  placeholder="Enter photo title"
-                  className="w-full"
+                  placeholder="Add short title"
+                  className="rounded-sm border-gray-200"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="description" className="text-sm font-medium">
+              <div className="space-y-1.5">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
                   Photo Description <span className="text-red-500">*</span>
                 </Label>
                 <Textarea
-                  id="description"
-                  placeholder="Describe your photo, key elements, and context"
-                  className="w-full min-h-[100px] resize-none"
+                  placeholder="Describe your photo, key elements, and context."
+                  className="rounded-sm border-gray-200 min-h-[120px]"
                 />
+                <p className="text-[9px] text-gray-400 italic">
+                  Up to 800 characters.
+                </p>
               </div>
 
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">
-                  AI OR NOT? <span className="text-red-500">*</span>
+              {/* File Upload Area */}
+              <div className="space-y-2 pt-2">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider">
+                  Photo File (JPG only) <span className="text-red-500">*</span>
                 </Label>
-                <p className="text-xs text-gray-500 mb-3">
-                  Please let us know if you used AI assistance or not.
-                </p>
-                <div className="space-y-3">
-                  <Label className="flex items-center gap-2 cursor-pointer">
+                <div className="flex items-center gap-4">
+                  <label className="bg-[#e5e7eb] hover:bg-gray-300 transition-colors px-4 py-2 rounded text-[11px] font-medium cursor-pointer">
+                    Choose File
                     <input
-                      type="radio"
-                      name="ai"
-                      value="yes"
-                      className="w-4 h-4"
+                      type="file"
+                      className="hidden"
+                      onChange={handleFileChange}
+                      accept=".jpg,.jpeg"
                     />
-                    <span className="text-sm">Photo is AI (YES)</span>
-                  </Label>
-                  <Label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="ai"
-                      value="no"
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm">No (AI is Photo)</span>
-                  </Label>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">
-                  File upload <span className="text-red-500">*</span>
-                </Label>
-                <p className="text-xs text-gray-500 mb-3">
-                  UPLOAD FILE: (Format: JPG/JPEG) (Size limit: 20MB)
-                </p>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    className="relative cursor-pointer"
-                    asChild
-                  >
-                    <label>
-                      <input
-                        type="file"
-                        className="hidden"
-                        accept=".jpg,.jpeg"
-                        onChange={handleFileChange}
-                      />
-                      <Upload className="w-4 h-4 mr-2" />
-                      Choose File
-                    </label>
-                  </Button>
-                  <span className="text-sm text-gray-500 flex items-center">
+                  </label>
+                  <span className="text-[11px] text-gray-500">
                     {fileName || "No file chosen"}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  File size limit: 20mb
-                </p>
-                <p className="text-xs text-gray-500">
-                  You had 5 submit left, when the submit completed, it can be!
+                <p className="text-[9px] text-gray-400">JPG, max size 10 MB.</p>
+              </div>
+
+              {/* Optional Field */}
+              <div className="space-y-1.5 pt-4">
+                <Label className="text-[11px] font-semibold uppercase tracking-wider text-gray-600">
+                  For Libre Art : concept description (Optional)
+                </Label>
+                <Textarea
+                  placeholder="Describe your photo, key elements, and context."
+                  className="rounded-sm border-gray-100 bg-gray-50/30 min-h-[80px]"
+                />
+                <p className="text-[9px] text-gray-400">
+                  This field is shown only when the selected category is Libre
+                  Art.
                 </p>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Agreements */}
-          <div className="space-y-4 pt-6 border-t">
-            <h3 className="text-base font-semibold text-gray-900">
+          {/* Agreements Section */}
+          <section className="space-y-6">
+            <h3 className="text-lg font-serif border-b border-gray-100 pb-2 mb-4">
               Agreements
             </h3>
-
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <Checkbox id="terms" className="mt-1" />
-                <Label
-                  htmlFor="terms"
-                  className="text-sm text-gray-700 cursor-pointer"
-                >
-                  I accept the{" "}
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Terms & Conditions
-                  </a>
-                  .
-                </Label>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Checkbox id="copyright" className="mt-1" />
-                <Label
-                  htmlFor="copyright"
-                  className="text-sm text-gray-700 cursor-pointer"
-                >
-                  I certify that I am the exclusive copyright holder of the
-                  submitted photo.
-                </Label>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Checkbox id="original" className="mt-1" />
-                <Label
-                  htmlFor="original"
-                  className="text-sm text-gray-700 cursor-pointer"
-                >
-                  I guarantee that the photo is my original work.
-                </Label>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Checkbox id="publish" className="mt-1" />
-                <Label
-                  htmlFor="publish"
-                  className="text-sm text-gray-700 cursor-pointer"
-                >
-                  I authorize Art Visor Awards to publish my photo for contest
-                  purposes.
-                </Label>
-              </div>
+            <div className="space-y-3">
+              {[
+                {
+                  id: "terms",
+                  label: (
+                    <>
+                      I accept the{" "}
+                      <span className="text-blue-500 cursor-pointer">
+                        Terms & Conditions
+                      </span>
+                      .
+                    </>
+                  ),
+                },
+                {
+                  id: "owner",
+                  label:
+                    "I certify that I am the exclusive copyright holder of the submitted photo.",
+                },
+                {
+                  id: "original",
+                  label: "I guarantee that the photo is my original work.",
+                },
+                {
+                  id: "auth",
+                  label:
+                    "I authorize Art Vision Awards to publish my photo for contest purposes.",
+                },
+              ].map((item) => (
+                <div key={item.id} className="flex items-center space-x-3">
+                  <Checkbox
+                    id={item.id}
+                    className="border-gray-300 rounded-sm w-3.5 h-3.5"
+                  />
+                  <Label
+                    htmlFor={item.id}
+                    className="text-[11px] text-gray-600 font-normal leading-none cursor-pointer"
+                  >
+                    {item.label}
+                  </Label>
+                </div>
+              ))}
             </div>
-          </div>
+          </section>
 
-          {/* Submit Button */}
-          <div className="pt-6">
-            <Button className="bg-[#C4A24C] hover:bg-[#B39340] text-white px-8 py-3">
+          {/* Action Footer */}
+          <div className="pt-4 space-y-3">
+            <Button className="bg-[#C4A24C] hover:bg-[#b3913b] text-white rounded-[4px] px-6 py-5 text-[11px] font-medium transition-all shadow-none">
               Submit Photo
             </Button>
+            <div>
+              <button className="text-[10px] text-blue-600 hover:underline italic">
+                Save and continue later
+              </button>
+            </div>
           </div>
         </div>
       </div>

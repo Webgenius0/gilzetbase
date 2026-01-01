@@ -17,7 +17,7 @@ const UploadPhotos = () => {
         </div>
 
         {/* Guidelines Box */}
-        <div className="bg-white border border-gray-200 rounded-xl p-8">
+        <div className="bg-white border border-[#CAA844] rounded-xl p-8">
           {/* Guidelines List */}
           <div className="space-y-4 mb-6">
             {guidelines.map((guideline, index) => (

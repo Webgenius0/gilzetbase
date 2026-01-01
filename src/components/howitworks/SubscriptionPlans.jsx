@@ -95,14 +95,14 @@ const plans = [
 
 const SubscriptionPlans = () => {
   return (
-    <div className="w-full py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="w-full py-16 bg-gray-50 ">
+      <div className="max-w-7xl mx-auto px-6 border border-rounded-lg rounded-2xl p-8 bg-white">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-normal text-gray-900 mb-3">
+          <h2 className="Georgia text-[48px] not-italic font-normal leading-[normal]">
             Choose your subscription
           </h2>
-          <p className="text-gray-600 text-base">
+          <p className="text-center font-[Inter] text-[24px] not-italic font-normal leading-[normal] text-[#565E69] mt-2">
             Select the plan that fits your creative workflow
           </p>
         </div>
