@@ -1,4 +1,5 @@
 import { Calendar, ArrowUpRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 const ArchiveCard = ({ collection }) => {
   return (
@@ -104,6 +105,10 @@ const WinnersArchive = () => {
           {collections.map((collection) => (
             <ArchiveCard key={collection.id} collection={collection} />
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Button variant="outline">view all winners</Button>
         </div>
       </div>
     </div>

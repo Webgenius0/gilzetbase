@@ -1,6 +1,6 @@
 const CountdownBox = ({ value, label }) => (
-  <div className="flex flex-col items-center">
-    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 min-w-[80px]">
+  <div className="flex flex-col items-center ">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-6 py-4 w-[150px]">
       <span className="text-white text-4xl md:text-5xl font-bold">
         {String(value).padStart(2, "0")}
       </span>

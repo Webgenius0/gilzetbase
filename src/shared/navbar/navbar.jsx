@@ -9,11 +9,12 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "Categories", path: "/categories" },
   { name: "Winners", path: "/winner" },
-  { name: "howitwork", path: "/howitwork" },
+  { name: "How It Works", path: "/howitwork" },
   { name: "Contest", path: "/contest" },
-  { name: "megazine", path: "/megazine" },
+  { name: "Megazine", path: "/megazine" },
   { name: "Manifesto", path: "/manifestos" },
   { name: "About", path: "/about" },
+  { name: "Subscription Plan", path: "/subscription" },
 ];
 
 export default function Navbar() {

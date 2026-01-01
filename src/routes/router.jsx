@@ -24,6 +24,7 @@ import SubscriptionPlanPage from "@/pages/dashboard/SubscriptionPlanPage";
 import ProfileSettingsPage from "@/pages/dashboard/ProfileSettingsPage";
 import SubmitPhotoForm from "@/components/SubmitPhotoForm";
 import PasswordSettings from "@/pages/dashboard/ChangesPassword";
+import SubscriptionPlan from "@/components/SubscriptionPlan";
 
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       { path: "megazine/:id", element: <MagazineDetails /> },
       { path: "faq", element: <FAQPage /> },
       { path: "submit-photo", element: <SubmitPhotoForm /> },
+      {
+        path: "subscription",
+        element: <SubscriptionPlan />,
+      },
     ],
   },
 
