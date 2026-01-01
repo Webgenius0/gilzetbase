@@ -7,11 +7,11 @@ const Newsletter = () => {
       <div className="relative py-32 bg-background flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         {/* Background - using a dark blurred image for the bokeh effect */}
         <div className="absolute inset-0 z-0">
-            <img 
-               src="https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg?auto=compress&cs=tinysrgb&w=1600" 
-               alt="Background" 
-               className="w-full h-full object-cover brightness-[0.4] blur-sm scale-110"
-            />
+          <img
+            src="https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Background"
+            className="w-full h-full object-cover brightness-[0.4] blur-sm scale-110"
+          />
         </div>
 
         <div className="relative z-10 max-w-2xl mx-auto">
@@ -46,28 +46,28 @@ const Newsletter = () => {
           <div className="flex justify-center gap-6 items-center mb-4">
             <a
               href="#"
-              className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-sm"
+              className="w-10 h-10 rounded-sm bg-linear-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-sm"
               aria-label="Instagram"
             >
               <Instagram className="w-5 h-5" />
             </a>
             <a
               href="#"
-              className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-sm"
+              className="w-10 h-10 rounded-sm bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-sm"
               aria-label="TikTok"
             >
               <Music className="w-5 h-5" />
             </a>
             <a
               href="#"
-              className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-sm"
+              className="w-10 h-10 rounded-sm bg-[#25D366] text-white flex items-center justify-center hover:scale-110 transition-transform shadow-sm"
               aria-label="WhatsApp"
             >
               <MessageCircle className="w-5 h-5" />
             </a>
           </div>
 
-          <p className="text-sm text-muted-foreground font-medium">
+          <p className="text-center font-[Inter] text-sm not-italic font-semibold leading-[normal] text-[#565E69">
             @ArtVisionAwards
           </p>
         </div>

@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
+import images from "../../assets/img6.png";
 
 const Upcomingevent = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
 
   useEffect(() => {
     // Set a fixed future date for consistent display, or relative for demo
     // Let's set it to next Sunday roughly, or just 2 days ahead to match the "1d 18h" vibe
     const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 2); 
+    targetDate.setDate(targetDate.getDate() + 2);
     targetDate.setHours(targetDate.getHours() + 18);
     targetDate.setMinutes(15);
 
@@ -39,12 +40,15 @@ const Upcomingevent = () => {
   }, []);
 
   return (
-    <div className="w-full py-12 bg-background">
+    <div className="w-full py-2 bg-background">
       <div className="container mx-auto px-4">
-        <div className="relative w-full h-[350px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl">
+        <div className="relative w-full h-[300px] md:h-[300px] rounded-3xl overflow-hidden shadow-2xl">
           {/* Background Image */}
           <img
-            src="https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src={
+              images ||
+              "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            }
             alt="Event Background"
             className="w-full h-full object-cover"
           />
@@ -53,11 +57,11 @@ const Upcomingevent = () => {
           <div className="absolute inset-0 bg-black/50 md:bg-black/40 backdrop-blur-[2px]" />
 
           {/* Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-wider mb-2 uppercase drop-shadow-md">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-[#F5F0E6] px-4">
+            <h2 className="text-center font-[Inter] text-[34.865px] not-italic font-bold leading-[normal]">
               Art Vision Awards
             </h2>
-            <p className="text-lg md:text-xl font-light text-white/90 mb-6 drop-shadow-sm">
+            <p className="text-center font-[Inter] text-[29.054px] not-italic font-semibold leading-[normal] text-[#F5F0E6] mb-4">
               Sunday Morning
             </p>
 

@@ -1,9 +1,13 @@
 import MagazineCard from "./MagazineCard";
 
+import images7 from "../../assets/img7.png";
+import images8 from "../../assets/img8.png";
+import images9 from "../../assets/img9.png";
+
 const articles = [
   {
     id: 1,
-    image: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: images7,
     category: "Fashion Photography",
     title: "The Art of Storytelling Through Style",
     description:
@@ -11,7 +15,7 @@ const articles = [
   },
   {
     id: 2,
-    image: "https://images.pexels.com/photos/2535859/pexels-photo-2535859.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: images8,
     category: "Portraits",
     title: "Capturing Emotion and Humanity",
     description:
@@ -19,15 +23,15 @@ const articles = [
   },
   {
     id: 3,
-    image: "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: images9,
     category: "Natural Light",
     title: "The Photographer's Ultimate Tool",
     description:
       "Lorem ipsum dolor sit amet consectetur. Faucibus neque egestas leo pellentesque faucibus ut enim.",
   },
-    {
+  {
     id: 4,
-    image: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: images8,
     category: "Fashion Photography",
     title: "The Art of Storytelling Through Style",
     description:
@@ -35,7 +39,7 @@ const articles = [
   },
   {
     id: 5,
-    image: "https://images.pexels.com/photos/2535859/pexels-photo-2535859.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: images7,
     category: "Portraits",
     title: "Capturing Emotion and Humanity",
     description:
@@ -43,7 +47,7 @@ const articles = [
   },
   {
     id: 6,
-    image: "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: images9,
     category: "Natural Light",
     title: "The Photographer's Ultimate Tool",
     description:

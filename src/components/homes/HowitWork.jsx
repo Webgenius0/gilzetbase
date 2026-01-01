@@ -4,7 +4,8 @@ const steps = [
   {
     number: "01",
     title: "Register",
-    description: "Create your free account in minutes. No credit card required.",
+    description:
+      "Create your free account in minutes. No credit card required.",
     icon: <UserPlus className="w-6 h-6 text-[#D4AF37]" />,
     bg: "bg-[#FFF9EA]",
   },
@@ -18,7 +19,8 @@ const steps = [
   {
     number: "03",
     title: "Reviewed by our jury",
-    description: "Each submission is carefully evaluated by our professional jury.",
+    description:
+      "Each submission is carefully evaluated by our professional jury.",
     icon: <FileText className="w-6 h-6 text-[#D4AF37]" />,
     bg: "bg-[#FFF9EA]",
   },
@@ -41,8 +43,8 @@ const HowitWork = () => {
             How it works
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto">
-            Submit your work, get reviewed by our jury, and compete for awards and
-            publication.
+            Submit your work, get reviewed by our jury, and compete for awards
+            and publication.
           </p>
         </div>
 
@@ -51,23 +53,23 @@ const HowitWork = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="bg-card rounded-xl p-8 border border-border/50 hover:shadow-lg transition-all duration-300 group"
+              className="bg-card rounded-xl p-8 border border-[#D1D5DB] hover:shadow-lg transition-all duration-300 group"
             >
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-10">
                 <div
                   className={`w-12 h-12 rounded-full ${step.bg} flex items-center justify-center`}
                 >
                   {step.icon}
                 </div>
-                <span className="text-2xl font-serif text-[#D4AF37]">
+                <span className="font-[Inter] text-[36px] not-italic font-normal leading-[40px] text-[#CAA844]">
                   {step.number}
                 </span>
               </div>
 
-              <h3 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors">
+              <h3 className="font-[Inter] text-[24px] not-italic font-semibold leading-[24px]  group-hover:text-primary transition-colors">
                 {step.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="font-[Inter] text-[16px] not-italic font-normal leading-[24px] text-[#565E69] mt-4">
                 {step.description}
               </p>
             </div>

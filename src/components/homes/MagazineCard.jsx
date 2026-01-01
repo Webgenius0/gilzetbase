@@ -7,7 +7,7 @@ const MagazineCard = ({ image, category, title, description }) => {
         <img
           src={image}
           alt={title}
-          className="w-full h-[395px] object-cover rounded-lg transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-[395px] object-cover rounded-xl transition-transform duration-700 group-hover:scale-105"
         />
       </div>
       <CardContent className="px-0 flex flex-col flex-1 ">
@@ -15,7 +15,7 @@ const MagazineCard = ({ image, category, title, description }) => {
           {category}
         </h3>
         <h4 className="text-start text-[#0A0A0A] font-inter text-[20px] font-medium leading-[40px] tracking-[1px]">
-            {title}
+          {title}
         </h4>
         <p className="text-justify text-[#565E69] font-inter text-[20px] font-medium leading-[24px]">
           {description}
