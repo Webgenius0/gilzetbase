@@ -5,10 +5,10 @@ import FirstPrizeImg from "../../assets/hero/first.png";
 import SecondPrizeImg from "../../assets/hero/secound.png";
 import ThirdPrizeImg from "../../assets/hero/thired.png";
 import FourthPrizeImg from "../../assets/hero/fourth.png";
-import FirstIconSvg from "@/assets/svg/FirstIconSvg";
-import SecoundSvg from "@/assets/svg/SecoundSvg";
-import ThirdSvg from "@/assets/svg/ThirdSvg";
-import ForthSvg from "@/assets/svg/forthSvg";
+import FirstIconSvg from "../../assets/svg/FirstIconSvg";
+import SecoundSvg from "../../assets/svg/SecoundSvg";
+import ThirdSvg from "../../assets/svg/ThirdSvg";
+import ForthSvg from "../../assets/svg/ForthSvg.jsx";
 import images from "../../assets/Frame.png";
 
 const WinnerPrice = () => {
