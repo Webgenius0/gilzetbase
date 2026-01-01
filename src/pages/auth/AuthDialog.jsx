@@ -15,7 +15,7 @@ const AuthDialog = () => {
       <DialogTrigger asChild>
         <button
           onClick={() => setMode("login")}
-          className="bg-white px-4 py-2 rounded-md h-full! text-foreground! text-base xl:font-normal font-bold cursor-pointer "
+          className="bg-transparent border border-[#CAA844] px-4 py-1.5 rounded-md h-full! text-[#CAA844] text-base xl:font-normal font-bold cursor-pointer "
         >
           Create a account
         </button>

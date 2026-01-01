@@ -14,21 +14,13 @@ const navLinks = [
   { name: "megazine", path: "/megazine" },
   { name: "Manifesto", path: "/manifestos" },
   { name: "About", path: "/about" },
-  // { name: "Home", path: "/" },
-  // { name: "Categories", path: "/categories" },
-  // { name: "Winners", path: "/winner" },
-  // { name: "How It Works", path: "/howitwork" },
-  // { name: "Contest", path: "/contest" },
-  // { name: "Megazine", path: "/megazine" },
-  // { name: "Manifesto", path: "/manifestos" },
-  // { name: "About", path: "/about" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="bg-zinc-900 px-6 py-4">
+    <nav className="bg-[#202020] px-6 py-4">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-yellow-600">
@@ -59,7 +51,7 @@ export default function Navbar() {
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center space-x-3">
           <Link to="/submit-photo">
-            <Button className="bg-yellow-600 hover:bg-yellow-700 text-black">
+            <Button className="bg-[#CAA844] hover:bg-yellow-700 text-white  hover:text-black">
               Submit a Photo
             </Button>
           </Link>
