@@ -1,5 +1,6 @@
 import { Calendar, ArrowUpRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 const ArchiveCard = ({ collection }) => {
   return (
@@ -85,7 +86,7 @@ const collections = [
   },
 ];
 
-const WinnersArchive = () => {
+const WinnersArchiveList = () => {
   return (
     <div className="w-full py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -108,11 +109,13 @@ const WinnersArchive = () => {
         </div>
 
         <div className="mt-8 text-center">
+          <Link to="/winner-archive">
           <Button variant="outline">view all winners</Button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default WinnersArchive;
+export default WinnersArchiveList;

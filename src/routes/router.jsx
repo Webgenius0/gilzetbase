@@ -25,6 +25,7 @@ import ProfileSettingsPage from "@/pages/dashboard/ProfileSettingsPage";
 import SubmitPhotoForm from "@/components/SubmitPhotoForm";
 import PasswordSettings from "@/pages/dashboard/ChangesPassword";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
+import WinnerArchive from "@/pages/winnerarchive/WinnerArchive";
 
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { path: "categories", element: <Categorie /> },
       { path: "manifestos", element: <Manifesto /> },
       { path: "winner", element: <Winner /> },
+      {path: "winner-archive", element: <WinnerArchive />},
       { path: "about", element: <About /> },
       { path: "howitwork", element: <HowitWork /> },
       { path: "contest", element: <Contest /> },

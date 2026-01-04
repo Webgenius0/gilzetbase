@@ -71,7 +71,7 @@ export default function Navbar() {
           </SheetTrigger>
 
           <SheetContent side="right" className="bg-zinc-900 border-zinc-800">
-            <div className="flex flex-col space-y-6 mt-10">
+            <div className="flex flex-col space-y-6 mt-10 p-2">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}

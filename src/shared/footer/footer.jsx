@@ -131,3 +131,168 @@ const Footer = () => {
 };
 
 export default Footer;
+
+// import React from "react";
+// import { Star, Mail, Phone, MapPin } from "lucide-react";
+
+// const Footer=()=> {
+//   return (
+//     <footer className="bg-black text-white">
+//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+//         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+//           <div>
+//             <div className="flex items-center gap-2 mb-4">
+//               <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+//                 <Star
+//                   className="w-5 h-5 text-gray-900"
+//                   fill="currentColor"
+//                 />
+//               </div>
+//               <div>
+//                 <div className="text-lg">THE VISION</div>
+//                 <div className="text-yellow-500 text-sm">
+//                   AWARDS
+//                 </div>
+//               </div>
+//             </div>
+//             <p className="text-gray-400 text-sm leading-relaxed">
+//               Celebrating excellence in cinematic storytelling
+//               and artistic vision since 2020.
+//             </p>
+//           </div>
+
+//           <div>
+//             <h4 className="mb-4">Quick Links</h4>
+//             <ul className="space-y-2 text-sm">
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   About Us
+//                 </a>
+//               </li>
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   Categories
+//                 </a>
+//               </li>
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   Nominees
+//                 </a>
+//               </li>
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   Past Winners
+//                 </a>
+//               </li>
+//             </ul>
+//           </div>
+
+//           <div>
+//             <h4 className="mb-4">Connect</h4>
+//             <ul className="space-y-2 text-sm">
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   News & Updates
+//                 </a>
+//               </li>
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   Press Kit
+//                 </a>
+//               </li>
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   Partners
+//                 </a>
+//               </li>
+//               <li>
+//                 <a
+//                   href="#"
+//                   className="text-gray-400 hover:text-yellow-500 transition-colors"
+//                 >
+//                   Contact
+//                 </a>
+//               </li>
+//             </ul>
+//           </div>
+
+//           <div>
+//             <h4 className="mb-4">Contact Info</h4>
+//             <ul className="space-y-3 text-sm">
+//               <li className="flex items-start gap-2">
+//                 <Mail className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+//                 <span className="text-gray-400">
+//                   info@visionawards.com
+//                 </span>
+//               </li>
+//               <li className="flex items-start gap-2">
+//                 <Phone className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+//                 <span className="text-gray-400">
+//                   +1 (555) 123-4567
+//                 </span>
+//               </li>
+//               <li className="flex items-start gap-2">
+//                 <MapPin className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+//                 <span className="text-gray-400">
+//                   Los Angeles, CA
+//                 </span>
+//               </li>
+//             </ul>
+//           </div>
+//         </div>
+
+//         <div className="border-t border-gray-800 pt-8">
+//           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+//             <p className="text-gray-400 text-sm">
+//               © 2024 The Vision Awards. All rights reserved.
+//             </p>
+//             <div className="flex gap-6 text-sm">
+//               <a
+//                 href="#"
+//                 className="text-gray-400 hover:text-yellow-500 transition-colors"
+//               >
+//                 Privacy Policy
+//               </a>
+//               <a
+//                 href="#"
+//                 className="text-gray-400 hover:text-yellow-500 transition-colors"
+//               >
+//                 Terms of Service
+//               </a>
+//               <a
+//                 href="#"
+//                 className="text-gray-400 hover:text-yellow-500 transition-colors"
+//               >
+//                 Cookie Policy
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// }
+
+
+// export default Footer;

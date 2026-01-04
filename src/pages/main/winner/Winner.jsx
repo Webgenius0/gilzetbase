@@ -1,6 +1,7 @@
 import CategorySlider from "@/components/homes/CategorySlider";
 import LatestWinner from "@/components/winners/LatestWinner";
 import WinnerHero from "@/components/winners/WinnerHero";
+import WinnersArchiveList from "@/components/winners/WinnersArchive";
 import WinnersArchive from "@/components/winners/WinnersArchive";
 import { Helmet } from "react-helmet-async";
 
@@ -14,7 +15,7 @@ const Winner = () => {
       <WinnerHero />
       <LatestWinner />
       <CategorySlider />
-      <WinnersArchive />
+      <WinnersArchiveList />
     </>
   );
 };

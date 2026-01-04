@@ -52,12 +52,12 @@ const Perticipate = () => {
       <div>
         <div className="min-h-screen bg-[#F7F6F3] py-24">
           <div className="container mx-auto px-8">
-            <h2 className="text-[#000] text-center font-[Georgia] text-[48px] not-italic font-normal leading-[44px] tracking-[2px]">
+            <h2 className="text-[#000] text-center font-[Georgia] text-xl md:text-[48px] not-italic font-normal leading-[44px] tracking-[2px]">
               WHY PARTICIPATE?
             </h2>
 
             <div className="mb-20 mt-12">
-              <div className="flex gap-12 items-center justify-center ">
+              <div className="flex flex-col md:flex-row gap-12 items-center justify-center ">
                 <div className="flex-2">
                   <img
                     src={
@@ -84,7 +84,7 @@ const Perticipate = () => {
             </div>
             <div className="border border-[#565E69] mb-20"></div>
 
-            <div className="grid grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {ajson.map((item) => (
                 <div className="flex flex-col" key={item.id}>
                   <div className="mb-6">
