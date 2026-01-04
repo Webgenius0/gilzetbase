@@ -68,10 +68,10 @@ const HomeHero = () => {
           </h1>
 
           <div className="flex flex-wrap gap-5">
-            <Button className="bg-[#CAA844] text-white hover:bg-white hover:text-black px-10 py-7 rounded-[7px] text-[11px] uppercase tracking-widest font-bold transition-all duration-300">
+            <Button className="bg-[#CAA844] text-white hover:bg-white hover:text-black px-5 py-4 rounded-[7px] text-[11px] uppercase tracking-widest font-bold transition-all duration-300">
               Submit a Photo
             </Button>
-            <Button variant="outline" className="border-[#CAA844]/40 text-[#CAA844] hover:bg-[#CAA844] hover:text-black px-10 py-7 rounded-[7px] text-[11px] uppercase tracking-widest transition-all duration-300">
+            <Button variant="outline" className="border-[#CAA844]/40 text-[#CAA844] hover:bg-[#CAA844] hover:text-black px-5 py-4 rounded-[7px] text-[11px] uppercase tracking-widest transition-all duration-300">
               Create Account
             </Button>
           </div>
