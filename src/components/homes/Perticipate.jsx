@@ -72,7 +72,7 @@ const Perticipate = () => {
                   <h3 className="text-start font-[Inter] text-[32px] not-italic font-medium leading-[24px] mb-5 tracking-tight">
                     International visibility
                   </h3>
-                  <p className="font-[Inter] text-[20px] not-italic font-medium leading-[24px] text-[#565E69]">
+                  <p className="font-[Inter] text-[17px] not-italic font-medium leading-[24px] text-[#565E69]">
                     Showcase your work to a global audience. Our awards commoda
                     a fringilla hendrerit quam sit. Fringilla diam posuisci
                     vierra arcu. Massa pretium urna consequat dignissim
@@ -94,8 +94,8 @@ const Perticipate = () => {
                         (item.id === 1
                           ? "https://images.pexels.com/photos/2310690/pexels-photo-2310690.jpeg?auto=compress&cs=tinysrgb&w=400&h=300"
                           : item.id === 2
-                          ? "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=400&h=300"
-                          : "https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=400&h=300")
+                            ? "https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=400&h=300"
+                            : "https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=400&h=300")
                       }
                       alt={item.alt}
                       className={item.imgClass}
