@@ -17,6 +17,9 @@ import { RouterProvider } from "react-router";
 import "./index.css";
 import { router } from "./routes/router";
 import { HelmetProvider } from "react-helmet-async";
+import { AuthProvider } from "./hooks/AuthContext";
+
+import { ReactLenis } from "lenis/react";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +27,11 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <ReactLenis root>
+            <RouterProvider router={router} />
+          </ReactLenis>
+        </AuthProvider>
       </HelmetProvider>
       <Toaster />
     </QueryClientProvider>

@@ -14,10 +14,10 @@ const MagazineCard = ({ image, category, title, description }) => {
         <h3 className="text-[#0A0A0A] font-inter text-[32px] font-medium leading-[40px] tracking-[2px]">
           {category}
         </h3>
-        <h4 className="text-start text-[#0A0A0A] font-inter text-[20px] font-medium leading-[40px] tracking-[1px]">
+        <h4 className="text-start text-[#0A0A0A] font-inter text-[18px] font-medium leading-[20px] tracking-[1px] py-2">
           {title}
         </h4>
-        <p className="text-justify text-[#565E69] font-inter text-[20px] font-medium leading-[24px]">
+        <p className="text-justify text-[#565E69] font-inter text-[12px] font-medium leading-[24px]">
           {description}
         </p>
       </CardContent>

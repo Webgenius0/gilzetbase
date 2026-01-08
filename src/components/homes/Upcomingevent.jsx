@@ -58,7 +58,7 @@ const Upcomingevent = () => {
 
           {/* Content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-[#F5F0E6] px-4">
-            <h2 className="text-center font-[Inter] text-[34.865px] not-italic font-bold leading-[normal]">
+            <h2 className="text-center font-[Inter] text-[30] not-italic font-bold leading-[normal]">
               Art Vision Awards
             </h2>
             <p className="text-center font-[Inter] text-[29.054px] not-italic font-semibold leading-[normal] text-[#F5F0E6] mb-4">

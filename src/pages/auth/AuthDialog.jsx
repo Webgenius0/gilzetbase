@@ -9,37 +9,67 @@ import SetNewPasswordDialog from "./SetNewPasswordDialog";
 const AuthDialog = () => {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState("login");
+  const [email, setEmail] = useState("");
+
+  const handleOpenStatus = (status) => {
+    setOpen(status);
+    if (!status) {
+      // Reset mode to login when closing
+      setTimeout(() => setMode("login"), 300);
+    }
+  };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenStatus}>
       <DialogTrigger asChild>
         <button
           onClick={() => setMode("login")}
-          className="bg-transparent border border-[#CAA844] px-4 py-1.5 rounded-md h-full! text-[#CAA844] text-base xl:font-normal font-bold cursor-pointer "
+          className="bg-transparent border border-[#CAA844] px-6 py-2 rounded-full text-[#CAA844] text-base font-bold cursor-pointer hover:bg-[#CAA844] hover:text-white transition-all active:scale-95"
         >
-          Create a account
+          Login / Register
         </button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-lg lg:max-w-xl bg-white text-black font-roboto">
+      <DialogContent className="sm:max-w-lg lg:max-w-xl p-0 border-none bg-transparent shadow-none overflow-hidden">
         {mode === "login" ? (
           <LoginDialog
             switchToRegister={() => setMode("register")}
             switchToForgot={() => setMode("forgot")}
+            onClose={() => setOpen(false)}
           />
         ) : mode === "register" ? (
-          <RegisterDialog switchToLogin={() => setMode("login")} />
+          <RegisterDialog
+            switchToLogin={() => setMode("login")}
+            switchOTPVerification={(email) => {
+              setEmail(email);
+              setMode("otp-email");
+            }}
+          />
         ) : mode === "forgot" ? (
           <ForgotPasswordDialog
             switchToLogin={() => setMode("login")}
-            switchOTPVerification={() => setMode("otp")}
+            switchOTPVerification={(email) => {
+              setEmail(email);
+              setMode("otp-forgot");
+            }}
           />
-        ) : mode === "otp" ? (
+        ) : mode === "otp-email" ? (
           <OTPVerificationDialog
+            email={email}
+            type="email-verification"
+            onSuccess={() => setMode("login")}
+          />
+        ) : mode === "otp-forgot" ? (
+          <OTPVerificationDialog
+            email={email}
+            type="forgot-password"
             switchToSetNewPassword={() => setMode("setNewPassword")}
           />
         ) : (
-          <SetNewPasswordDialog />
+          <SetNewPasswordDialog
+            email={email}
+            onSuccess={() => setMode("login")}
+          />
         )}
       </DialogContent>
     </Dialog>

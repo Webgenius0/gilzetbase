@@ -4,10 +4,11 @@ import HeroBg from "../../assets/Landingbg.png";
 
 // HD images for a premium look
 const carouselImages = [
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1000",
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1000",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1000",
+  "https://avatars.mds.yandex.net/get-shedevrum/15102269/img_766586fdd70311efb2d5caf2840a7b5b/orig",
+  "https://artmostprint.ru/wp-content/uploads/2017/10/katalog-008.jpg",
+ "https://i.pinimg.com/474x/d5/c1/87/d5c18722936b18e9a211ce9d212a7fe7.jpg",
+  "https://avatars.mds.yandex.net/get-shedevrum/16525081/img_55456a6101de11f09a1b06608fe15d8d/orig",
+
 ];
 
 const HomeHero = () => {

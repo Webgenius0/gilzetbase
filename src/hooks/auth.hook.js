@@ -1,69 +1,140 @@
-import { useNavigate } from "react-router";
-import { useSearchParams } from "react-router";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signInSchema } from "@/schemas/auth.schema";
-import { axiosPublic } from "@/configs/axios.config";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { axiosPublic, axiosPrivate } from "@/configs/axios.config";
+import toast from "react-hot-toast";
+import { useAuth } from "./AuthContext";
 
-
-
-
-
-
-
-//sign in
-export const useSignIn = () => {
-    const [params] = useSearchParams();
-    const navigate = useNavigate();
-    const redirectUrl = params.get("redirect");
-
-    const form = useForm({
-        resolver: zodResolver(signInSchema),
-        defaultValues: {
-            email: "",
-            password: "",
+// Register hook
+export const useRegister = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPublic.post("/auth/register", data);
+            return res.data;
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Registration failed");
         },
     });
+};
 
-    const { mutate, isPending } = useMutation({
+// Verify Email hook
+export const useVerifyEmail = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPublic.post("/auth/verify-email", data);
+            return res.data;
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Email verification failed");
+        },
+    });
+};
+
+// Resend OTP hook
+export const useResendOTP = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPublic.post("/auth/resend-otp", data);
+            return res.data;
+        },
+        onSuccess: (data) => {
+            if (data.status) {
+                toast.success(data.message || "OTP resent successfully");
+            }
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Failed to resend OTP");
+        },
+    });
+};
+
+// Login hook
+export const useLogin = () => {
+    const { login } = useAuth();
+    return useMutation({
         mutationFn: async (credentials) => {
             const res = await axiosPublic.post("/auth/login", credentials);
             return res.data;
         },
         onSuccess: (data) => {
-            if (data?.status) {
-                toast.success(data?.message || "Sign in successfully");
-                const token = data?.token;
-                localStorage.setItem("token", token);
-                const user = data?.data;
-                localStorage.setItem("user", JSON.stringify(user));
-
-                if (redirectUrl) {
-                    navigate(redirectUrl);
-                } else {
-                    navigate("/");
-                }
+            if (data.status) {
+                login(data.token, data.data);
+                toast.success(data.message || "Login successful");
             } else {
-                toast.error(data?.message || "Failed to sign in");
+                toast.error(data.message || "Login failed");
             }
         },
         onError: (error) => {
-            const message =
-                error?.response?.data?.message ||
-                error?.response?.data?.error || // fallback to `data.error`
-                error.message ||
-                "Failed to sign in";
-
-            // Handle email-specific error
-            if (
-                typeof message === "string" &&
-                message.toLowerCase().includes("email")
-            ) {
-                form.setError("email", { message });
-            } else {
-                toast.error(message);
-            }
+            toast.error(error.response?.data?.message || "Login failed");
         },
     });
+};
 
-    return { form, mutate, isPending };
+// Forgot Password hook
+export const useForgotPassword = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPublic.post("/auth/forget-password", data);
+            return res.data;
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Failed to send OTP");
+        },
+    });
+};
+
+// Verify OTP (Forgot Password) hook
+export const useVerifyOTP = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPublic.post("/auth/verify-otp", data);
+            return res.data;
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "OTP verification failed");
+        },
+    });
+};
+
+// Reset Password hook
+export const useResetPassword = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPublic.post("/auth/reset-password", data);
+            return res.data;
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Failed to reset password");
+        },
+    });
+};
+
+// Get User Info hook
+export const useGetUserInfo = () => {
+    return useQuery({
+        queryKey: ["user-info"],
+        queryFn: async () => {
+            const res = await axiosPrivate.get("/auth/user-info");
+            return res.data;
+        },
+        retry: false,
+    });
+};
+
+// Logout hook
+export const useLogout = () => {
+    const { logout } = useAuth();
+    return useMutation({
+        mutationFn: async () => {
+            const res = await axiosPrivate.post("/auth/logout");
+            return res.data;
+        },
+        onSuccess: () => {
+            logout();
+            toast.success("Logged out successfully");
+        },
+        onError: (error) => {
+            console.error("Logout error", error);
+            logout(); // Logout anyway locally
+        },
+    });
 };
