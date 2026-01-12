@@ -19,6 +19,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+import LogoImg from "@/assets/Logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -41,11 +42,12 @@ export default function Navbar() {
     <nav className="bg-[#202020] px-6 py-4">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="text-yellow-600">
-          <div className="text-2xl font-serif">AVA</div>
-          <div className="text-[8px] tracking-widest -mt-1">PHOTOGRAPHY</div>
-          <div className="text-[7px] tracking-wider -mt-0.5">AWARDS</div>
-        </div>
+        <img
+          src={LogoImg}
+          alt="AVA ART VISION AWARDS"
+          className="h-15 w-auto  object-contain"
+        />
+
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center space-x-8">
@@ -54,10 +56,9 @@ export default function Navbar() {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `text-sm transition pb-1 ${
-                  isActive
-                    ? "text-yellow-600 border-b-2 border-yellow-600"
-                    : "text-gray-300 hover:text-yellow-600"
+                `text-sm transition pb-1 ${isActive
+                  ? "text-yellow-600 border-b-2 border-yellow-600"
+                  : "text-gray-300 hover:text-yellow-600"
                 }`
               }
             >
@@ -111,7 +112,7 @@ export default function Navbar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-zinc-800" />
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   onClick={() => logout()}
                   className="focus:bg-zinc-800 focus:text-red-500 cursor-pointer text-red-400"
                 >
@@ -142,10 +143,9 @@ export default function Navbar() {
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `text-sm transition pb-1 ${
-                      isActive
-                        ? "text-yellow-600 border-b-2 border-yellow-600"
-                        : "text-gray-300 hover:text-yellow-600"
+                    `text-sm transition pb-1 ${isActive
+                      ? "text-yellow-600 border-b-2 border-yellow-600"
+                      : "text-gray-300 hover:text-yellow-600"
                     }`
                   }
                 >
@@ -166,16 +166,16 @@ export default function Navbar() {
                       </div>
                       <div className="text-xs text-muted-foreground">{user?.email}</div>
                     </div>
-                    <Link 
-                      to="/dashboard" 
+                    <Link
+                      to="/dashboard"
                       onClick={() => setOpen(false)}
                       className="flex items-center text-sm text-gray-300 hover:text-yellow-600 transition-colors py-2"
                     >
                       <LayoutDashboard className="mr-2 h-4 w-4" />
                       Dashboard
                     </Link>
-                    <Link 
-                      to="/profile" 
+                    <Link
+                      to="/profile"
                       onClick={() => setOpen(false)}
                       className="flex items-center text-sm text-gray-300 hover:text-yellow-600 transition-colors py-2"
                     >

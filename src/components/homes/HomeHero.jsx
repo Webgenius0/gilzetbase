@@ -100,7 +100,7 @@ const HomeHero = () => {
             Art Vision <br /> <span>Awards</span>
           </h1>
 
-          <div className="flex flex-wrap gap-5">
+          <div className="flex gap-5">
             <Button className="bg-[#CAA844] text-white hover:bg-white hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest font-bold transition-all duration-300">
               Submit a Photo
             </Button>
@@ -129,9 +129,9 @@ const HomeHero = () => {
         </div>
 
         {/* --- RIGHT COLUMN: SLIDER 3 (Next Preview) --- */}
-        <div className="col-span-12 lg:col-span-3 flex flex-col justify-center items-end relative h-full">
+        <div className="hidden lg:flex col-span-12 lg:col-span-3 flex flex-col justify-center items-end relative h-full">
           <div className="flex flex-col items-end gap-12 mr-[-10%] xl:mr-[-25%]">
-            <p className="text-[#D8D05A] font-[Inter] text-[40px] font-extralight leading-[58px] tracking-[2px] max-w-sm absolute bottom-[10%] -left-[20%]">
+            <p className="hidden lg:block text-[#D8D05A] font-[Inter] text-[40px] font-extralight leading-[58px] tracking-[2px] max-w-sm absolute bottom-[10%] -left-[20%]">
               Where Art Meets Vision
             </p>
 
@@ -155,9 +155,9 @@ const HomeHero = () => {
         </div>
 
         {/* Glowing Background Orbs (Remaining Same) */}
-        <div className="absolute left-[35%] top-[20%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px]" />
-        <div className="absolute left-[35%] top-[70%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] mix-blend-screen" />
-        <div className="absolute right-[2%] top-[40%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] mix-blend-screen  -z-10" />
+        <div className="absolute left-[35%] top-[20%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] hidden lg:block" />
+        <div className="absolute left-[35%] top-[70%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] mix-blend-screen hidden lg:block" />
+        <div className="absolute right-[2%] top-[40%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] mix-blend-screen  -z-10 hidden lg:block" />
       </div>
     </section>
   );
