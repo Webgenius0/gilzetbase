@@ -27,6 +27,12 @@ import PasswordSettings from "@/pages/dashboard/ChangesPassword";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
 import WinnerArchive from "@/pages/winnerarchive/WinnerArchive";
 
+// Jury Pages
+import JuryLayout from "@/layouts/jury/JuryLayout";
+import JuryDashboard from "@/pages/jury/JuryDashboard";
+import JuryArchive from "@/pages/jury/JuryArchive";
+import JuryProfile from "@/pages/jury/JuryProfile";
+
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
   {
@@ -37,7 +43,7 @@ export const router = createBrowserRouter([
       { path: "categories", element: <Categorie /> },
       { path: "manifestos", element: <Manifesto /> },
       { path: "winner", element: <Winner /> },
-      {path: "winner-archive", element: <WinnerArchive />},
+      { path: "winner-archive", element: <WinnerArchive /> },
       { path: "about", element: <About /> },
       { path: "howitwork", element: <HowitWork /> },
       { path: "contest", element: <Contest /> },
@@ -75,6 +81,17 @@ export const router = createBrowserRouter([
           { path: "password", element: <PasswordSettings /> }, // /dashboard/account/password
         ],
       },
+    ],
+  },
+
+  // ⚖️ JURY PORTAL
+  {
+    path: "/jury",
+    element: <JuryLayout />,
+    children: [
+      { path: "dashboard", element: <JuryDashboard /> },
+      { path: "archive", element: <JuryArchive /> },
+      { path: "profile", element: <JuryProfile /> },
     ],
   },
 
