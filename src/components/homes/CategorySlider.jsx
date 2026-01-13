@@ -1,78 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-
-const categories = [
-  {
-    id: 1,
-    title: 'Models / Hair / Styling',
-    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 2,
-    title: 'Fine Art & Conceptual',
-    image: 'https://images.pexels.com/photos/1209843/pexels-photo-1209843.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 3,
-    title: 'Nature & Travel',
-    image: 'https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 4,
-    title: 'Architecture & Urban',
-    image: 'https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 5,
-    title: 'Food & Lifestyle',
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 6,
-    title: 'Sports & Action',
-    image: 'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=800',
-  }, {
-    id: 7,
-    title: 'Models / Hair / Styling',
-    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 8,
-    title: 'Fine Art & Conceptual',
-    image: 'https://images.pexels.com/photos/1209843/pexels-photo-1209843.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 9,
-    title: 'Nature & Travel',
-    image: 'https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 10,
-    title: 'Architecture & Urban',
-    image: 'https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 11,
-    title: 'Food & Lifestyle',
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 12,
-    title: 'Sports & Action',
-    image: 'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-];
+import { useGetCategories } from '../../hooks/home.hook';
 
 const CARD_WIDTH = 340;
 const GAP = 24;
 
 const CategorySlider = () => {
+  const { data: categoriesData, isLoading, isError } = useGetCategories();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startPos, setStartPos] = useState(0);
   const [currentTranslate, setCurrentTranslate] = useState(0);
   const [prevTranslate, setPrevTranslate] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
+
+  const categories = categoriesData?.data?.data || [];
 
   const calculateVisibleCards = () => {
     // Determine how many cards fit in the viewport
@@ -97,14 +39,14 @@ const CategorySlider = () => {
 
   /* ---------- AUTO SLIDE ---------- */
   useEffect(() => {
-    if (isDragging) return;
+    if (isDragging || categories.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 3500);
 
     return () => clearInterval(interval);
-  }, [maxIndex, isDragging]);
+  }, [maxIndex, isDragging, categories.length]);
 
   /* ---------- UPDATE TRANSLATE ---------- */
   useEffect(() => {
@@ -112,7 +54,7 @@ const CategorySlider = () => {
     if (currentIndex > maxIndex) {
       setCurrentIndex(maxIndex);
     }
-    
+
     const newTranslate = -currentIndex * (CARD_WIDTH + GAP);
     setCurrentTranslate(newTranslate);
     setPrevTranslate(newTranslate);
@@ -122,6 +64,7 @@ const CategorySlider = () => {
     e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
 
   const handleStart = (e) => {
+    if (categories.length === 0) return;
     setIsDragging(true);
     setStartPos(getPositionX(e));
   };
@@ -146,6 +89,18 @@ const CategorySlider = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="w-full py-20 bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (isError || categories.length === 0) {
+    return null;
+  }
+
   return (
     <div className="w-full py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -155,46 +110,46 @@ const CategorySlider = () => {
         </div>
       </div>
 
-        <div className="w-full overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing pl-4"
-            style={{ 
-              transform: `translateX(${currentTranslate}px)`, 
-              gap: GAP 
-            }}
-            onMouseDown={handleStart}
-            onMouseMove={handleMove}
-            onMouseUp={handleEnd}
-            onMouseLeave={() => isDragging && handleEnd()}
-            onTouchStart={handleStart}
-            onTouchMove={handleMove}
-            onTouchEnd={handleEnd}
-          >
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className="flex-shrink-0 relative rounded-2xl overflow-hidden group cursor-pointer"
-                style={{ width: CARD_WIDTH, height: 360 }}
-              >
-                <img
-                  src={category.image}
-                  alt={category.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  draggable={false}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 p-6 w-full">
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-white text-xl font-medium">
-                      {category.title}
-                    </h3>
-                    <ArrowUpRight className="text-white w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
+      <div className="w-full overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing pl-4"
+          style={{
+            transform: `translateX(${currentTranslate}px)`,
+            gap: GAP
+          }}
+          onMouseDown={handleStart}
+          onMouseMove={handleMove}
+          onMouseUp={handleEnd}
+          onMouseLeave={() => isDragging && handleEnd()}
+          onTouchStart={handleStart}
+          onTouchMove={handleMove}
+          onTouchEnd={handleEnd}
+        >
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="flex-shrink-0 relative rounded-2xl overflow-hidden group cursor-pointer"
+              style={{ width: CARD_WIDTH, height: 360 }}
+            >
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 p-6 w-full">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-white text-xl font-medium">
+                    {category.name}
+                  </h3>
+                  <ArrowUpRight className="text-white w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
 
       <div className="container mx-auto px-4">
         {/* Dots */}
@@ -203,9 +158,8 @@ const CategorySlider = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all ${
-                index === currentIndex ? 'w-8 bg-foreground' : 'w-2 bg-muted'
-              }`}
+              className={`h-2 rounded-full transition-all ${index === currentIndex ? 'w-8 bg-foreground' : 'w-2 bg-muted'
+                }`}
             />
           ))}
         </div>
@@ -213,4 +167,5 @@ const CategorySlider = () => {
     </div>
   );
 }
+
 export default CategorySlider;

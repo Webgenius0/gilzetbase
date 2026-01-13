@@ -20,3 +20,13 @@ export const useGetJuries = () => {
         },
     });
 };
+
+export const useGetCategories = () => {
+    return useQuery({
+        queryKey: ["categories"],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/category");
+            return res.data;
+        },
+    });
+};
