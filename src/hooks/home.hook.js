@@ -10,3 +10,13 @@ export const useGetWhyParticipates = () => {
         },
     });
 };
+
+export const useGetJuries = () => {
+    return useQuery({
+        queryKey: ["juries"],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/juries");
+            return res.data;
+        },
+    });
+};
