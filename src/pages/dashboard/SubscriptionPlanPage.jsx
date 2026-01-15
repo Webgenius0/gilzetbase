@@ -5,63 +5,59 @@ import { Card } from "@/components/ui/card";
 const SubscriptionPlanPage = () => {
   const planFeatures = [
     {
-      icon: <Check className="w-5 h-5 text-[#C4A24C]" />,
       title: "Profile Visibility",
       description: "Get discovered by potential customers",
     },
     {
-      icon: <Check className="w-5 h-5 text-[#C4A24C]" />,
       title: "Secure Dashboard",
       description: "Manage your business profile safely",
     },
     {
-      icon: <Check className="w-5 h-5 text-[#C4A24C]" />,
       title: "Mobile Optimized",
       description: "Perfect experience on all devices",
     },
     {
-      icon: <Check className="w-5 h-5 text-[#C4A24C]" />,
       title: "Regular Updates",
       description: "New features added monthly",
     },
   ];
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 py-12">
-      <div className=" mx-auto px-6">
-        {/* Page Title */}
-        <h1 className="text-3xl font-normal text-gray-900 mb-8">
+    <div className="w-full min-h-screen bg-[#F8F9FD] py-12">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Page Title - Serif Hook */}
+        <h1 className="text-3xl font-serif text-gray-900 mb-10">
           Your Subscription Plan
         </h1>
 
         {/* Subscription Details Card */}
-        <Card className="bg-white rounded-xl border border-gray-200 p-8 mb-12">
-          <div className="space-y-6">
+        <Card className="bg-white rounded-[20px] border-none shadow-[0_2px_15px_rgba(0,0,0,0.05)] p-8 mb-10">
+          <div className="space-y-4">
             {/* Subscription */}
-            <div className="flex items-center justify-between pb-6 border-b border-gray-200">
-              <span className="text-sm font-medium text-gray-700">
+            <div className="flex items-center justify-between px-6 py-4 bg-white border border-gray-200 rounded-[12px]">
+              <span className="text-[15px] font-medium text-gray-700">
                 Subscription
               </span>
-              <span className="text-sm text-gray-600">1-month plan</span>
+              <span className="text-[15px] text-gray-500">1-month plan</span>
             </div>
 
             {/* Price */}
-            <div className="flex items-center justify-between pb-6 border-b border-gray-200">
-              <span className="text-sm font-medium text-gray-700">Price</span>
-              <span className="text-sm text-gray-900 font-semibold">$79</span>
+            <div className="flex items-center justify-between px-6 py-4 bg-white border border-gray-200 rounded-[12px]">
+              <span className="text-[15px] font-medium text-gray-700">Price</span>
+              <span className="text-[15px] text-gray-900 font-semibold">$79</span>
             </div>
 
             {/* Next Billing Date */}
-            <div className="flex items-center justify-between pb-6">
-              <span className="text-sm font-medium text-gray-700">
+            <div className="flex items-center justify-between px-6 py-4 bg-white border border-gray-200 rounded-[12px]">
+              <span className="text-[15px] font-medium text-gray-700">
                 Next billing date
               </span>
-              <span className="text-sm text-gray-600">January 20, 2026</span>
+              <span className="text-[15px] text-gray-500">January 20, 2026</span>
             </div>
 
-            {/* Cancel Button */}
-            <div className="pt-2">
-              <Button className="w-full md:w-auto md:ml-auto md:flex bg-[#C4A24C] hover:bg-[#B39340] text-white px-8 py-3 rounded-lg">
+            {/* Cancel Button - Right Aligned */}
+            <div className="flex justify-end pt-4">
+              <Button className="bg-[#D4A017] hover:bg-[#B8860B] text-white px-10 py-6 rounded-[12px] text-sm font-semibold transition-all">
                 Cancel subscription
               </Button>
             </div>
@@ -69,29 +65,29 @@ const SubscriptionPlanPage = () => {
         </Card>
 
         {/* All Plans Include Section */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-900 text-center mb-10">
+        <div className="bg-white rounded-[20px] border-none shadow-[0_2px_15px_rgba(0,0,0,0.05)] p-12">
+          <h2 className="text-[22px] font-bold text-gray-900 text-center mb-12">
             All Plans Include
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {planFeatures.map((feature, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center text-center"
+                className="flex flex-col items-center text-center group"
               >
-                {/* Icon */}
-                <div className="w-12 h-12 bg-[#FFF9F0] rounded-full flex items-center justify-center mb-4">
-                  {feature.icon}
+                {/* Icon Container with Gold Styling */}
+                <div className="w-10 h-10 bg-[#FFF9E6] rounded-full flex items-center justify-center mb-5 border border-amber-100">
+                  <Check className="w-5 h-5 text-[#C4A24C]" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-semibold text-gray-900 mb-2">
+                <h3 className="text-[15px] font-bold text-gray-900 mb-2">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-[13px] text-gray-500 leading-relaxed max-w-[180px]">
                   {feature.description}
                 </p>
               </div>

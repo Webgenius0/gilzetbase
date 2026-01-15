@@ -58,13 +58,31 @@ const MySubmissions = () => {
     <div className="w-full min-h-screen bg-gray-50 py-8">
       <div className=" mx-auto px-6">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            My Submissions
-          </h1>
-          <p className="text-sm text-gray-600">
-            View and manage your photography contest submissions
-          </p>
+        <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              My Submissions
+            </h1>
+            <p className="text-sm text-gray-600">
+              View and manage your photography contest submissions
+            </p>
+          </div>
+          <div className="flex flex-col items-end gap-2">
+            <div className="bg-amber-100 border border-amber-200 rounded-lg p-3 flex items-center gap-4">
+              <div>
+                <p className="text-xs text-amber-800 font-medium uppercase tracking-wider">
+                  Remaining Credits
+                </p>
+                <p className="text-xl font-bold text-amber-900">2 / 5 Photos</p>
+              </div>
+              <Button
+                onClick={() => navigate("/dashboard/subscription")}
+                className="bg-amber-500 hover:bg-amber-600 text-white shadow-sm"
+              >
+                Upgrade Plan
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Stats Cards */}
@@ -78,6 +96,11 @@ const MySubmissions = () => {
               <p className={`text-3xl font-bold ${stat.color}`}>{stat.value}</p>
             </Card>
           ))}
+          <Card className="bg-gradient-to-br from-amber-500 to-amber-600 p-6 rounded-lg shadow-md border-none text-white">
+            <p className="text-sm text-amber-100 mb-2">Credits Left</p>
+            <p className="text-3xl font-bold text-white">2</p>
+            <p className="text-xs text-amber-100 mt-1">out of 5 total</p>
+          </Card>
         </div>
 
         {/* Search Bar */}
@@ -94,68 +117,88 @@ const MySubmissions = () => {
           {submissions.map((submission) => (
             <Card
               key={submission.id}
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:border-amber-200 transition-colors"
             >
               <div className="flex items-start gap-4">
                 {/* Thumbnail */}
-                <img
-                  src={submission.image}
-                  alt={submission.title}
-                  className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
-                />
+                <div className="relative group">
+                  <img
+                    src={submission.image}
+                    alt={submission.title}
+                    className="w-24 h-24 rounded-lg object-cover flex-shrink-0 shadow-sm"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-white text-xs"
+                      onClick={() =>
+                        navigate(`/dashboard/submissions/${submission.id}`)
+                      }
+                    >
+                      View
+                    </Button>
+                  </div>
+                </div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        {submission.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase tracking-wider">
+                          Contest
+                        </span>
+                        <h3 className="text-lg font-bold text-gray-900 leading-tight">
+                          {submission.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm font-medium text-amber-600 mb-1">
                         {submission.subtitle}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Submission Date : {submission.date}
-                      </p>
+                      <div className="flex items-center gap-4 text-xs text-gray-500">
+                        <span>Submitted: {submission.date}</span>
+                        <span>•</span>
+                        <span>ID: {submission.submissionId}</span>
+                      </div>
                     </div>
-                    <Button
-                      className={`${submission.statusColor} text-white px-4 py-1.5 rounded-full text-sm font-medium hover:opacity-90`}
-                    >
-                      {submission.status}
-                    </Button>
+                    <div className="flex flex-col items-end gap-2">
+                      <Button
+                        className={`${submission.statusColor} text-white px-4 py-1.5 rounded-full text-xs font-bold hover:opacity-90 shadow-sm`}
+                      >
+                        {submission.status}
+                      </Button>
+                    </div>
                   </div>
 
                   {/* Details Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-200">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-200">
                     <div>
-                      <p className="text-xs text-gray-500 mb-1">CATEGORY</p>
-                      <p className="text-sm font-medium text-[#C4A24C]">
+                      <p className="text-[10px] text-gray-500 mb-1 font-bold uppercase tracking-wider">
+                        CATEGORY
+                      </p>
+                      <p className="text-sm font-bold text-gray-800">
                         {submission.category}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 mb-1">
-                        SUBMISSION ID
+                      <p className="text-[10px] text-gray-500 mb-1 font-bold uppercase tracking-wider">
+                        COUNTRY
                       </p>
-                      <p className="text-sm font-semibold text-gray-900">
-                        {submission.submissionId}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">COUNTRY</p>
-                      <p className="text-sm text-gray-900">
+                      <p className="text-sm font-bold text-gray-800">
                         {submission.country}
                       </p>
                     </div>
-                    <div className="flex items-end">
+                    <div className="md:col-span-2 flex justify-end items-end">
                       <Button
-                        variant="link"
-                        className="text-[#C4A24C] hover:text-[#B39340] p-0 h-auto font-medium text-sm"
+                        variant="outline"
+                        size="sm"
+                        className="border-amber-200 text-amber-700 hover:bg-amber-50 font-bold text-xs"
                         onClick={() =>
                           navigate(`/dashboard/submissions/${submission.id}`)
                         }
                       >
-                        View Details
+                        FULL DETAILS
                       </Button>
                     </div>
                   </div>
