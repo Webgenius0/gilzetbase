@@ -52,7 +52,7 @@ export default function AffiliateLayout() {
                 </div>
 
                 {/* Page Content */}
-                <div className="p-8 overflow-auto h-[calc(100vh-80px)] scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+                <div className="p-8">
                     <Outlet />
                 </div>
             </div>

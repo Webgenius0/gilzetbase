@@ -15,7 +15,7 @@ export default function Sidebar() {
   const isAccountActive = location.pathname.startsWith("/dashboard/account");
 
   return (
-    <aside className="w-64 bg-[#0b0b0b] text-white flex flex-col justify-between">
+    <aside className="w-64 bg-[#0b0b0b] text-white flex flex-col justify-between h-screen sticky top-0">
       {/* Top */}
       <div>
         {/* Logo */}
@@ -32,8 +32,7 @@ export default function Sidebar() {
             to="/dashboard"
             end
             className={({ isActive }) =>
-              `flex gap-2 items-center px-4 py-2 rounded ${
-                isActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
+              `flex gap-2 items-center px-4 py-2 rounded ${isActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
               }`
             }
           >
@@ -64,8 +63,7 @@ export default function Sidebar() {
           <NavLink
             to="/dashboard/subscription"
             className={({ isActive }) =>
-              `flex gap-2 items-center px-4 py-2 rounded ${
-                isActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
+              `flex gap-2 items-center px-4 py-2 rounded ${isActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
               }`
             }
           >
@@ -91,9 +89,8 @@ export default function Sidebar() {
           {/* ===== MY ACCOUNT DROPDOWN ===== */}
           <button
             onClick={() => setOpenAccount(!openAccount)}
-            className={`w-full flex items-center gap-2 px-4 py-2 rounded transition ${
-              isAccountActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
-            }`}
+            className={`w-full flex items-center gap-2 px-4 py-2 rounded transition ${isAccountActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
+              }`}
           >
             <span className="flex-1 flex gap-2 items-center text-left">
               {" "}
@@ -132,9 +129,8 @@ export default function Sidebar() {
               My Account
             </span>
             <span
-              className={`transform transition ${
-                openAccount ? "rotate-180" : ""
-              }`}
+              className={`transform transition ${openAccount ? "rotate-180" : ""
+                }`}
             >
               ▾
             </span>
@@ -147,8 +143,7 @@ export default function Sidebar() {
                 to="/dashboard/account/profile"
                 end
                 className={({ isActive }) =>
-                  `block px-3 py-2 rounded text-sm ${
-                    isActive ? "bg-[#d4af37]" : "hover:bg-gray-100"
+                  `block px-3 py-2 rounded text-sm ${isActive ? "bg-[#d4af37]" : "hover:bg-gray-100"
                   }`
                 }
               >
@@ -158,8 +153,7 @@ export default function Sidebar() {
               <NavLink
                 to="/dashboard/account/password"
                 className={({ isActive }) =>
-                  `block px-3 py-2 rounded text-sm ${
-                    isActive ? "bg-[#d4af37]" : "hover:bg-gray-100"
+                  `block px-3 py-2 rounded text-sm ${isActive ? "bg-[#d4af37]" : "hover:bg-gray-100"
                   }`
                 }
               >

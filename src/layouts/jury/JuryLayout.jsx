@@ -30,7 +30,7 @@ export default function JuryLayout() {
                 </div>
 
                 {/* Page Content */}
-                <div className="p-6 overflow-auto h-[calc(100vh-64px)]">
+                <div className="p-6">
                     <Outlet />
                 </div>
             </div>

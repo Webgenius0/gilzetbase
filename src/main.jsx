@@ -28,7 +28,14 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <AuthProvider>
-          <ReactLenis root>
+          <ReactLenis root options={{
+            lerp: 0.1,
+            duration: 1.5,
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
+          }}>
             <RouterProvider router={router} />
           </ReactLenis>
         </AuthProvider>
