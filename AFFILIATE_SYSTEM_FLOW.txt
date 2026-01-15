@@ -1,0 +1,123 @@
+=============================================================================
+AFFILIATE SYSTEM - FULL WORKFLOW & ARCHITECTURE
+=============================================================================
+
+This document outlines the complete user journey, data flow, and logic for the 
+Affiliate System within the Gilzet platform.
+
+-----------------------------------------------------------------------------
+1. PARTNER ACQUISITION & ONBOARDING FLOW
+-----------------------------------------------------------------------------
+[ User Action ]                         [ System / Backend Logic ]
+      |
+      v
+1. User visits /affiliate               -> Serve Landing Page (Public)
+      |
+      +-> "Join Program" Button
+      |
+      v
+2. User lands on /affiliate/register    
+      |
+      +-> Fills Form:
+          - First Name, Last Name
+          - Email, Password
+          - User Type (Photographer/Visitor)
+          - Promotion Channels
+      |
+      v
+3. Submits Application                  -> 1. Validate Input (Email uniqueness)
+                                        -> 2. Create User/Affiliate Record
+                                        -> 3. Generate Unique "Affiliate ID" (e.g., ref_8a2b9c)
+                                        -> 4. Set Status = "PENDING" (if approval required) 
+                                           OR "ACTIVE" (if auto-approve)
+                                        -> 5. Send "Welcome" Email
+      |
+      v
+4. On Success Screen                    -> Redirect to /affiliate/login
+                                           (or direct dashboard access if auto-login)
+
+
+-----------------------------------------------------------------------------
+2. DASHBOARD & PROMOTION FLOW
+-----------------------------------------------------------------------------
+[ User Action ]                         [ System / Backend Logic ]
+      |
+      v
+1. User Logs in (/affiliate/login)      -> Verify Credentials
+                                        -> Check Affiliate Role
+      |
+      v
+2. Enters Dashboard (/affiliate/panel)  -> Fetch Dashboard Data:
+                                           - Lifetime Earnings
+                                           - Click Counts
+                                           - Recent Referrals
+      |
+      v
+3. Visits "Marketing Assets"            -> Generate unique tracking links:
+   (/affiliate/panel/materials)            Ex: gilzet.com/?ref=ref_8a2b9c
+      |
+      +-> Copies Link or Banner HTML
+
+
+-----------------------------------------------------------------------------
+3. TRACKING & CONVERSION FLOW (The "Magic")
+-----------------------------------------------------------------------------
+[ Visitor Action ]                       [ System Logic ]
+      |
+      v
+1. Clicks Affiliate Link                 -> 1. URL param `?ref=ref_8a2b9c` detected.
+   (gilzet.com/?ref=...)                 -> 2. Store `ref_ID` in Browser HTTP-Only Cookie.
+                                            (Cookie Duration: 30 days)
+                                         -> 3. Store `ref_ID` in LocalStorage (fallback).
+      |
+      v
+2. Visitor Browses Site                  -> Cookie persists across pages.
+      |
+      v
+3. Visitor Registers New Account         -> 1. Registration API checks for Cookie/LocalStorage.
+   (User / Photographer)                 -> 2. If present, associate NewUser with AffiliateID.
+                                         -> 3. Record "Referral" event in DB.
+
+(Note: Commission is usually triggered on PAYMENT, not just free registration, 
+unless it's a specific "Lead Generation" model).
+
+
+-----------------------------------------------------------------------------
+4. COMMISSION & PAYOUT FLOW
+-----------------------------------------------------------------------------
+[ Trigger Event ]                       [ System Logic ]
+      |
+      v
+1. Referred User Buys Subscription      -> 1. Payment Gateway confirms Success.
+   or Enters Paid Contest               -> 2. System checks `referred_by` field on User.
+                                        -> 3. Calculate Commission (e.g., 20% of $50).
+                                        -> 4. Create Ledger Entry:
+                                              { affiliate_id, amount: 10.00, status: 'PENDING' }
+      |
+      v
+2. Admin Review (Monthly)               -> Admin checks for refunds/fraud.
+                                        -> Bulk updates status: PENDING -> APPROVED.
+      |
+      v
+3. Payout Execution                     -> Admin processes payout (PayPal/Bank).
+                                        -> Updates status: APPROVED -> PAID.
+                                        -> Affiliate sees expected arrival in Dashboard.
+
+=============================================================================
+TECHNICAL IMPLEMENTATION DETAILS (Frontend)
+=============================================================================
+
+1. New Routes:
+   - /affiliate (Landing)
+   - /affiliate/register
+   - /affiliate/login
+   - /affiliate/panel/* (Protected Layout)
+
+2. State Management:
+   - Need an `AuthProvider` specific for affiliates or extend the existing one.
+   - Store JWT token upon login.
+   
+3. Key Components Needed:
+   - `AffiliateRouteProtection`: Redirects to login if no token.
+   - `TrackingScript`: A small `useEffect` in `RootLayout` to catch `?ref=` and save the cookie.
+

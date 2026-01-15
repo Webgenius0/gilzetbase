@@ -33,6 +33,16 @@ import JuryDashboard from "@/pages/jury/JuryDashboard";
 import JuryArchive from "@/pages/jury/JuryArchive";
 import JuryProfile from "@/pages/jury/JuryProfile";
 
+// Affiliate System
+import AffiliateLayout from "@/layouts/affiliate/AffiliateLayout";
+import AffiliateProgramHome from "@/pages/affiliate/AffiliateProgramHome";
+import AffiliateLogin from "@/pages/affiliate/auth/AffiliateLogin";
+import AffiliateRegister from "@/pages/affiliate/auth/AffiliateRegister";
+import AffiliateOverview from "@/pages/affiliate/dashboard/AffiliateOverview";
+import AffiliateCommissions from "@/pages/affiliate/dashboard/AffiliateCommissions";
+import AffiliatePromotions from "@/pages/affiliate/dashboard/AffiliatePromotions";
+import AffiliateSettings from "@/pages/affiliate/dashboard/AffiliateSettings";
+
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
   {
@@ -93,6 +103,26 @@ export const router = createBrowserRouter([
       { path: "archive", element: <JuryArchive /> },
       { path: "profile", element: <JuryProfile /> },
     ],
+  },
+
+  // 🤝 AFFILIATE SYSTEM
+  {
+    path: "/affiliate",
+    children: [
+      { index: true, element: <AffiliateProgramHome /> },
+      { path: "register", element: <AffiliateRegister /> },
+      { path: "login", element: <AffiliateLogin /> },
+      {
+        path: "panel",
+        element: <AffiliateLayout />,
+        children: [
+          { index: true, element: <AffiliateOverview /> },
+          { path: "commissions", element: <AffiliateCommissions /> },
+          { path: "materials", element: <AffiliatePromotions /> },
+          { path: "settings", element: <AffiliateSettings /> },
+        ]
+      }
+    ]
   },
 
   // ❌ 404 PAGE
