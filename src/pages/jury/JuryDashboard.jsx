@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 import { toast } from "react-hot-toast";
 import { CheckCircle, Info, Star, ChevronRight, Maximize2 } from "lucide-react";
 
@@ -94,12 +95,14 @@ export default function JuryDashboard() {
                     >
                         {/* Image Container - Larger & Dynamic */}
                         <div className="relative aspect-[4/5] overflow-hidden bg-gray-900">
-                            <img
-                                src={candidate.photoUrl}
-                                alt="Candidate Submission"
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                loading="lazy"
-                            />
+                            <Link to={`/jury/dashboard/${candidate.id}`} className="block w-full h-full cursor-pointer">
+                                <img
+                                    src={candidate.photoUrl}
+                                    alt="Candidate Submission"
+                                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                    loading="lazy"
+                                />
+                            </Link>
 
                             {/* Premium Overlays */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
@@ -123,10 +126,10 @@ export default function JuryDashboard() {
                             </div>
 
                             {/* Info on bottom of image */}
-                            <div className="absolute bottom-6 left-8 right-8 text-white">
-                                <div className="text-xs font-medium text-[#d4af37] mb-1">ID: #{candidate.id.toString().padStart(4, '0')}</div>
-                                <h3 className="text-2xl font-bold">{candidate.title}</h3>
-                            </div>
+                            <Link to={`/jury/dashboard/${candidate.id}`} className="absolute bottom-6 left-8 right-8 text-white group/info">
+                                <div className="text-xs font-medium text-[#d4af37] mb-1 group-hover/info:translate-x-1 transition-transform">ID: #{candidate.id.toString().padStart(4, '0')}</div>
+                                <h3 className="text-2xl font-bold group-hover/info:text-[#d4af37] transition-colors">{candidate.title}</h3>
+                            </Link>
 
                             {/* Score Checkmark */}
                             {votedCandidates[candidate.id] && (

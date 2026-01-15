@@ -32,6 +32,7 @@ import JuryLayout from "@/layouts/jury/JuryLayout";
 import JuryDashboard from "@/pages/jury/JuryDashboard";
 import JuryArchive from "@/pages/jury/JuryArchive";
 import JuryProfile from "@/pages/jury/JuryProfile";
+import JuryPhotoDetails from "@/pages/jury/JuryPhotoDetails";
 
 // Affiliate System
 import AffiliateLayout from "@/layouts/affiliate/AffiliateLayout";
@@ -100,6 +101,7 @@ export const router = createBrowserRouter([
     element: <JuryLayout />,
     children: [
       { path: "dashboard", element: <JuryDashboard /> },
+      { path: "dashboard/:id", element: <JuryPhotoDetails /> },
       { path: "archive", element: <JuryArchive /> },
       { path: "profile", element: <JuryProfile /> },
     ],
