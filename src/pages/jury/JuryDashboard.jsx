@@ -192,7 +192,7 @@ export default function JuryDashboard() {
             </div>
 
             {/* Results Calculation Section */}
-            {progress > 0 && (
+            {/* {progress > 0 && (
                 <div
                     className="mt-20 p-10 bg-white rounded-[3rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-100"
                 >
@@ -265,7 +265,7 @@ export default function JuryDashboard() {
                         </div>
                     )}
                 </div>
-            )}
+            )} */}
 
             {/* Image Preview Modal */}
             {selectedImage && (
