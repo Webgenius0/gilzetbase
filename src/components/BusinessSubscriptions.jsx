@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Check, Star, Building2, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { useGetPricingPlans } from "../hooks/pricingPlan.hook";
 
 const PricingCard = ({
   title,
@@ -85,60 +86,32 @@ const PricingCard = ({
 
 const BusinessSubscriptions = () => {
   const [isYearly, setIsYearly] = useState(false);
+  const { data: pricingPlans = [], isLoading } = useGetPricingPlans();
 
-  const plans = [
-    {
-      title: "Starter",
-      icon: Building2,
-      price: 29, // Number for easy calculation
-      description: "Lorem ipsum dolor sit amet consectetur.",
-      features: [
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum",
-        "Lorem ipsum",
-        "Lorem ipsum",
-        "Lorem ipsum dolor sit amet",
-      ],
-    },
-    {
-      title: "Professional",
-      icon: Star,
-      isPopular: true,
-      price: 79,
-      description: "Lorem ipsum dolor sit amet",
-      features: [
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum",
-        "Lorem ipsum dolor sit amet",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor sit amet",
-        "Lorem ipsum dolor sit amet",
-        "Lorem ipsum dolor sit",
-        "Lorem",
-      ],
-    },
-    {
-      title: "Enterprise",
-      icon: Crown,
-      price: 199,
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Imperdiet hac lacus sed suspendisse lectus.",
-      features: [
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum",
-        "Lorem ipsum dolor sit amet",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor sit amet",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor",
-        "Lorem ipsum dolor sit",
-        "Lorem ipsum dolor sit amet",
-      ],
-    },
-  ];
+  // Map API data to component format with icons
+  const getIconForPlan = (index) => {
+    const icons = [Building2, Star, Crown];
+    return icons[index] || Building2;
+  };
+
+  const plans = pricingPlans.map((plan, idx) => ({
+    title: plan.name || "Plan",
+    icon: getIconForPlan(idx),
+    price: parseFloat(plan.price) || 0,
+    description: plan.description || "",
+    features: plan.features || [],
+    isPopular: plan.is_recommended || false,
+    offerDescription: plan.offer_description || "",
+    billingInterval: plan.billing_interval || "month",
+  }));
+
+  if (isLoading) {
+    return (
+      <section className="w-full min-h-screen bg-white py-24 px-6 flex flex-col items-center justify-center">
+        <p className="text-gray-500">Loading pricing plans...</p>
+      </section>
+    );
+  }
 
   return (
     <section className="w-full min-h-screen bg-white py-24 px-6 flex flex-col items-center">
