@@ -49,7 +49,7 @@ export default function JuryDashboard() {
     const progress = Math.round((Object.keys(votedCandidates).length / candidates.length) * 100);
 
     return (
-        <div className="max-w-7xl mx-auto pb-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 pb-20">
             {/* Header Section */}
             <div className="relative mb-12 p-8 rounded-3xl bg-gradient-to-br from-[#1a1c2c] to-[#4a192c] text-white shadow-2xl overflow-hidden">
                 <div className="relative z-10">
@@ -192,80 +192,78 @@ export default function JuryDashboard() {
             </div>
 
             {/* Results Calculation Section */}
-            {/* {progress > 0 && (
-                <div
-                    className="mt-20 p-10 bg-white rounded-[3rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-100"
-                >
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
-                        <div>
-                            <div className="flex items-center gap-3 mb-2">
-                                <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">LIVE CALCULATION</span>
-                                <h2 className="text-3xl font-black text-gray-900 tracking-tight">Global Standing <span className="text-[#d4af37]">Top 10</span></h2>
-                            </div>
-                            <p className="text-gray-500">Based on the current average from all jury members. Positions may shift until final validation.</p>
+            <div
+                className="relative z-10 mt-20 p-10 bg-white rounded-[3rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-100"
+            >
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+                    <div>
+                        <div className="flex items-center gap-3 mb-2">
+                            <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">LIVE CALCULATION</span>
+                            <h2 className="text-3xl font-black text-gray-900 tracking-tight">Global Standing <span className="text-[#d4af37]">Top 10</span></h2>
                         </div>
-                        <button
-                            disabled={progress < 100}
-                            className={`px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 ${progress === 100
-                                ? "bg-black text-white hover:scale-105 active:scale-95 shadow-xl shadow-black/20"
-                                : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                }`}
-                        >
-                            Finalize & Submit Results
-                            <ChevronRight size={20} />
-                        </button>
+                        <p className="text-gray-500">Based on the current average from all jury members. Positions may shift until final validation.</p>
                     </div>
+                    <button
+                        disabled={progress < 100}
+                        className={`px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 ${progress === 100
+                            ? "bg-black text-white hover:scale-105 active:scale-95 shadow-xl shadow-black/20"
+                            : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                            }`}
+                    >
+                        Finalize & Submit Results
+                        <ChevronRight size={20} />
+                    </button>
+                </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {candidates
-                            .map(c => ({
-                                ...c,
-                                myScore: votedCandidates[c.id] || 0,
-                                // Simulate average from other 4 jury members (random 12-18 range)
-                                otherAvg: (Math.random() * 6 + 12),
-                                get globalAvg() {
-                                    return (this.myScore + this.otherAvg * 4) / 5;
-                                }
-                            }))
-                            .sort((a, b) => b.globalAvg - a.globalAvg)
-                            .slice(0, 10)
-                            .map((winner, idx) => (
-                                <div
-                                    key={winner.id}
-                                    className="flex items-center gap-6 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-md transition-all group"
-                                >
-                                    <div className="relative">
-                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl ${idx === 0 ? "bg-[#d4af37] text-white ring-4 ring-[#d4af37]/20" :
-                                            idx === 1 ? "bg-gray-400 text-white" :
-                                                idx === 2 ? "bg-orange-400 text-white" : "bg-white text-gray-400"
-                                            }`}>
-                                            {idx + 1}
-                                        </div>
-                                    </div>
-                                    <div className="h-16 w-16 rounded-xl overflow-hidden shadow-sm group-hover:scale-110 transition-transform">
-                                        <img src={winner.photoUrl} className="w-full h-full object-cover" alt="" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h4 className="font-bold text-gray-900 leading-tight">Submission #{winner.id.toString().padStart(4, '0')}</h4>
-                                        <div className="text-xs text-gray-500 uppercase tracking-wider">{winner.category}</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-2xl font-black text-gray-900 group-hover:text-[#d4af37] transition-colors">{winner.globalAvg.toFixed(1)}</div>
-                                        <div className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Avg Score</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {candidates
+                        .map(c => ({
+                            ...c,
+                            myScore: votedCandidates[c.id] || 0,
+                            // Simulate average from other 4 jury members (random 12-18 range)
+                            otherAvg: (Math.random() * 6 + 12),
+                            get globalAvg() {
+                                return (this.myScore + this.otherAvg * 4) / 5;
+                            }
+                        }))
+                        .sort((a, b) => b.globalAvg - a.globalAvg)
+                        .slice(0, 10)
+                        .map((winner, idx) => (
+                            <div
+                                key={winner.id}
+                                className="flex items-center gap-6 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-md transition-all group"
+                            >
+                                <div className="relative">
+                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl ${idx === 0 ? "bg-[#d4af37] text-white ring-4 ring-[#d4af37]/20" :
+                                        idx === 1 ? "bg-gray-400 text-white" :
+                                            idx === 2 ? "bg-orange-400 text-white" : "bg-white text-gray-400"
+                                        }`}>
+                                        {idx + 1}
                                     </div>
                                 </div>
-                            ))
-                        }
-                    </div>
-
-                    {progress < 100 && (
-                        <div className="mt-8 p-4 bg-amber-50 rounded-xl border border-amber-100 flex items-center gap-3 text-amber-800 text-sm">
-                            <Info size={18} />
-                            Complete all {candidates.length} evaluations to enable submission to administration.
-                        </div>
-                    )}
+                                <div className="h-16 w-16 rounded-xl overflow-hidden shadow-sm group-hover:scale-110 transition-transform">
+                                    <img src={winner.photoUrl} className="w-full h-full object-cover" alt="" />
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-bold text-gray-900 leading-tight">Submission #{winner.id.toString().padStart(4, '0')}</h4>
+                                    <div className="text-xs text-gray-500 uppercase tracking-wider">{winner.category}</div>
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-2xl font-black text-gray-900 group-hover:text-[#d4af37] transition-colors">{winner.globalAvg.toFixed(1)}</div>
+                                    <div className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Avg Score</div>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
-            )} */}
+
+                {progress < 100 && (
+                    <div className="mt-8 p-4 bg-amber-50 rounded-xl border border-amber-100 flex items-center gap-3 text-amber-800 text-sm">
+                        <Info size={18} />
+                        Complete all {candidates.length} evaluations to enable submission to administration.
+                    </div>
+                )}
+            </div>
 
             {/* Image Preview Modal */}
             {selectedImage && (

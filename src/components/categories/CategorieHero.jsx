@@ -1,13 +1,27 @@
 import image from "../../../src/assets/categories/category-bg.png"
+import { useGetHero } from "../../hooks/hero.hook";
 
 const CategorieHero = () => {
-    const title = "Fashion Photography"
-    const subtitle = "Fashion, editorial, couture, look book"
+  const { data: heroData, isLoading } = useGetHero("category");
+
+  const heroContent = heroData?.[0] || {};
+  const title = heroContent.title || "Fashion Photography";
+  const subtitle = heroContent.description || "Fashion, editorial, couture, look book";
+  const backgroundImage = heroContent.image || image;
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-[60vh] md:h-[657px] relative overflow-hidden bg-gray-200 flex items-center justify-center">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-[60vh] md:h-[657px] relative overflow-hidden">
       {/* Background Image */}
       <img
-        src={image}
+        src={backgroundImage}
         alt={title}
         className="w-full h-full object-cover"
       />
