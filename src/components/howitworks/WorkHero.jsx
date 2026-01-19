@@ -1,12 +1,20 @@
 import image from "../../assets/howitwork.png";
+import { useGetHero } from "../../hooks/hero.hook";
 
 const WorkHero = () => {
-  const title = "How It Works";
-  const subtitle = "A simple, powerful system to showcase artists worldwide";
+  const { data: heroData } = useGetHero("howItWork");
+
+  const heroContent = heroData?.[0] || {};
+  const title = heroContent.title || "How It Works";
+  const subtitle =
+    heroContent.description ||
+    "A simple, powerful system to showcase artists worldwide";
+  const imageUrl = heroContent.image || image;
+
   return (
     <div className="w-full h-[60vh] md:h-[657px] relative overflow-hidden">
       {/* Background Image */}
-      <img src={image} alt={title} className="w-full h-full object-cover" />
+      <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
