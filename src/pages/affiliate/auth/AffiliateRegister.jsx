@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { Mail, User, Lock, ExternalLink, ArrowRight, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function AffiliateRegister() {
@@ -9,44 +10,28 @@ export default function AffiliateRegister() {
         firstName: '',
         lastName: '',
         email: '',
-        userType: 'Photographer', // Default
+        userType: 'Photographer',
         promotionChannels: '',
         password: '',
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Basic Validation
         if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
             toast.error("Please fill in all required fields");
             return;
         }
-
         setIsLoading(true);
-
         try {
-            // TODO: Replace with actual API call
-            // const res = await axiosPublic.post('/affiliate/register', formData);
-
-            // Simulating API latency
             await new Promise(resolve => setTimeout(resolve, 1500));
-
-            console.log("Submitting Affiliate Application:", formData);
-
             toast.success("Application submitted successfully! Please log in.");
             navigate('/affiliate/login');
-
         } catch (error) {
-            console.error(error);
             toast.error("Registration failed. Please try again.");
         } finally {
             setIsLoading(false);
@@ -54,145 +39,142 @@ export default function AffiliateRegister() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
-
-                {/* Left Info Panel */}
-                <div className="bg-[#1a1a1a] text-white p-10 md:w-2/5 flex flex-col justify-between relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37] opacity-10 rounded-full blur-3xl -mr-12 -mt-12"></div>
-
-                    <div className="relative z-10">
-                        <Link to="/affiliate" className="text-[#d4af37] font-bold text-xl mb-8 block">AVA Affiliate</Link>
-                        <h2 className="text-3xl font-bold mb-4">Join the program</h2>
-                        <ul className="space-y-4 text-gray-300 text-sm">
-                            <li className="flex items-start gap-3">
-                                <span className="text-[#d4af37] mt-1">✓</span>
-                                <span>Competitive commission rates</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <span className="text-[#d4af37] mt-1">✓</span>
-                                <span>Exclusive marketing assets</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <span className="text-[#d4af37] mt-1">✓</span>
-                                <span>Monthly payouts via PayPal/Bank</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="relative z-10 mt-12">
-                        <p className="text-gray-400 text-xs">
-                            By applying, you agree to our Affiliate Terms & Conditions and Privacy Policy. All applications are subject to approval.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Right Form Panel */}
-                <div className="p-10 md:w-3/5">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Application Form</h2>
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full rounded-md border-gray-300 focus:border-[#d4af37] focus:ring-[#d4af37]"
-                                />
+        <div className="min-h-screen bg-[#f5f6fa] flex items-center justify-center p-6 py-12">
+            <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                <div className="p-8 md:p-12">
+                    <div className="text-center mb-10">
+                        <Link to="/" className="inline-flex items-center gap-2 mb-6">
+                            <div className="w-10 h-10 bg-[#d4af37] rounded-lg flex items-center justify-center text-black font-bold text-xl">
+                                A
                             </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full rounded-md border-gray-300 focus:border-[#d4af37] focus:ring-[#d4af37]"
-                                />
+                            <span className="text-2xl font-bold text-gray-900 tracking-tight">AVA Affiliate</span>
+                        </Link>
+                        <h1 className="text-2xl font-bold text-gray-900">Partner Application</h1>
+                        <p className="text-gray-500 text-sm mt-2">Join our network and start earning commissions</p>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">First Name</label>
+                                <div className="relative">
+                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        placeholder="John"
+                                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm transition-all"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Last Name</label>
+                                <div className="relative">
+                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        placeholder="Doe"
+                                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm transition-all"
+                                    />
+                                </div>
                             </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full rounded-md border-gray-300 focus:border-[#d4af37] focus:ring-[#d4af37]"
-                            />
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Email Address</label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="john@example.com"
+                                    className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm transition-all"
+                                />
+                            </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">I am a</label>
-                            <select
-                                name="userType"
-                                value={formData.userType}
-                                onChange={handleChange}
-                                className="w-full rounded-md border-gray-300 focus:border-[#d4af37] focus:ring-[#d4af37]"
-                            >
-                                <option value="Photographer">Photographer</option>
-                                <option value="Visitor">Visitor / Art Lover</option>
-                                <option value="Influencer">Influencer</option>
-                            </select>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Partner Type</label>
+                                <select
+                                    name="userType"
+                                    value={formData.userType}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm font-medium appearance-none cursor-pointer"
+                                >
+                                    <option value="Photographer">Photographer</option>
+                                    <option value="Influencer">Influencer / Creator</option>
+                                    <option value="Agency">Marketing Agency</option>
+                                    <option value="Visitor">Industry Enthusiast</option>
+                                </select>
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Primary Channel</label>
+                                <div className="relative">
+                                    <ExternalLink className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                    <input
+                                        type="text"
+                                        name="promotionChannels"
+                                        value={formData.promotionChannels}
+                                        onChange={handleChange}
+                                        placeholder="instagram.com/user"
+                                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm transition-all"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Promotion Channels (Website/Social)</label>
-                            <input
-                                type="text"
-                                name="promotionChannels"
-                                value={formData.promotionChannels}
-                                onChange={handleChange}
-                                placeholder="e.g. instagram.com/myphotos"
-                                className="w-full rounded-md border-gray-300 focus:border-[#d4af37] focus:ring-[#d4af37]"
-                            />
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Create Password</label>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    placeholder="••••••••"
+                                    className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm transition-all"
+                                />
+                            </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                                minLength={6}
-                                className="w-full rounded-md border-gray-300 focus:border-[#d4af37] focus:ring-[#d4af37]"
-                            />
-                        </div>
-
-                        <div className="pt-2">
+                        <div className="pt-4">
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-[#d4af37] hover:bg-[#c29f2d] text-black font-bold py-3 rounded-lg transition-colors flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full bg-gray-900 hover:bg-black text-white py-4 rounded-lg font-bold text-base transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg shadow-gray-200"
                             >
                                 {isLoading ? (
-                                    <>
-                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        Processing...
-                                    </>
+                                    <Loader2 className="animate-spin" size={20} />
                                 ) : (
-                                    "Submit Application"
+                                    <>
+                                        <span>Submit Application</span>
+                                        <ArrowRight size={18} />
+                                    </>
                                 )}
                             </button>
                         </div>
                     </form>
-                    <div className="mt-4 text-center">
-                        <span className="text-sm text-gray-500">Already a partner? </span>
-                        <Link to="/affiliate/login" className="text-sm text-[#d4af37] font-semibold hover:underline">Sign In</Link>
+
+                    <div className="mt-10 pt-6 border-t border-gray-100 text-center">
+                        <p className="text-sm text-gray-500">
+                            Already part of the network?{' '}
+                            <Link to="/affiliate/login" className="text-[#d4af37] font-bold hover:underline">
+                                Member Login
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+

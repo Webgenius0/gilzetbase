@@ -1,18 +1,20 @@
 import { NavLink, useNavigate } from "react-router";
 import {
+    Users,
     LayoutDashboard,
     DollarSign,
-    Gift,
     Settings,
-    LogOut
+    LogOut,
+    UserCheck,
+    BarChart3
 } from "lucide-react";
 import toast from "react-hot-toast";
 
-export default function AffiliateSidebar() {
+export default function AdminSidebar() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        toast.info("Signing out...");
+        toast.info("Logging out...");
         setTimeout(() => {
             navigate("/affiliate/login");
         }, 1000);
@@ -25,22 +27,23 @@ export default function AffiliateSidebar() {
                 {/* Logo */}
                 <div className="p-6 border-b border-white/10">
                     <h1 className="text-xl font-bold text-[#d4af37]">
-                        AVA <span className="text-sm font-normal">Affiliate</span>
+                        AVA <span className="text-sm font-normal">Admin</span>
                     </h1>
                 </div>
 
                 {/* Menu */}
                 <nav className="p-4 space-y-2">
                     {[
-                        { to: "/affiliate/panel", label: "Dashboard", icon: LayoutDashboard, end: true },
-                        { to: "/affiliate/panel/commissions", label: "Commissions", icon: DollarSign },
-                        { to: "/affiliate/panel/materials", label: "Marketing Kit", icon: Gift },
-                        { to: "/affiliate/panel/settings", label: "Settings", icon: Settings },
+                        { to: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
+                        { to: "/admin/affiliates", label: "Affiliates", icon: Users },
+                        { to: "/admin/commissions", label: "Commissions", icon: DollarSign },
+                        { to: "/admin/payouts", label: "Payout Requests", icon: UserCheck },
+                        { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
+                        { to: "/admin/settings", label: "Settings", icon: Settings },
                     ].map((item, i) => (
                         <NavLink
                             key={i}
                             to={item.to}
-                            end={item.end}
                             className={({ isActive }) =>
                                 `flex gap-2 items-center px-4 py-2 rounded transition-colors ${isActive ? "bg-[#d4af37] text-black" : "hover:bg-white/10"
                                 }`
@@ -60,10 +63,9 @@ export default function AffiliateSidebar() {
                     className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors w-full px-4 py-2"
                 >
                     <LogOut size={20} />
-                    <span className="text-sm font-medium">Sign Out</span>
+                    <span className="text-sm font-medium">Log Out</span>
                 </button>
             </div>
         </aside>
     );
 }
-

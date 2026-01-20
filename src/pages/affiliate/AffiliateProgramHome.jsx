@@ -1,95 +1,155 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { ArrowRight, CheckCircle2, TrendingUp, Users, Gift, ShieldCheck, Globe, Zap, BarChart3 } from 'lucide-react';
 
 export default function AffiliateProgramHome() {
     return (
         <div className="font-sans text-gray-900 bg-white">
-            {/* Hero Section */}
-            <section className="relative overflow-hidden bg-black text-white py-24 lg:py-32">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1554048612-387768052bf7?q=80&w=2535&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+            {/* 🌟 Hero Section */}
+            <section className="relative pt-20 pb-32 overflow-hidden border-b border-gray-100">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-8">
+                            <Zap size={14} />
+                            Partner with Excellence
+                        </div>
 
-                <div className="container mx-auto px-6 relative z-10 text-center">
-                    <span className="inline-block py-1 px-3 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] text-sm font-semibold tracking-wider mb-6">
-                        OFFICIAL PARTNER PROGRAM
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                        Turn Your Passion <br /> Into <span className="text-[#d4af37]">Profit</span>
-                    </h1>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-                        Join our exclusive affiliate network. Refer photographers and art lovers, and earn generous commissions on every successful registration.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link to="/affiliate/register" className="bg-[#d4af37] text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c29f2d] transition-transform hover:scale-105">
-                            Become a Partner
-                        </Link>
-                        <Link to="/affiliate/login" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all">
-                            Partner Login
-                        </Link>
+                        <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight text-gray-900">
+                            Empower Your Influence. <br />
+                            <span className="text-[#d4af37]">Earn Weekly Rewards.</span>
+                        </h1>
+
+                        <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed">
+                            Join our exclusive partner network and earn up to 30% recurring commission for every photographer you refer to the platform.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <Link
+                                to="/affiliate/register"
+                                className="bg-gray-900 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-black transition-all shadow-lg flex items-center gap-2"
+                            >
+                                Apply for Partner Access
+                                <ArrowRight size={20} />
+                            </Link>
+                            <Link
+                                to="/affiliate/login"
+                                className="text-gray-600 font-bold hover:text-gray-900 transition-colors px-6 py-4"
+                            >
+                                Existing Partner? Sign In
+                            </Link>
+                        </div>
                     </div>
                 </div>
+
+                {/* Subtle Background Decoration */}
+                <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-blue-50 rounded-full blur-3xl"></div>
             </section>
 
-            {/* Features Grid */}
-            <section className="py-24 bg-gray-50">
+            {/* 📊 Stats Section */}
+            <section className="py-16 bg-gray-50 border-b border-gray-100">
                 <div className="container mx-auto px-6">
-                    <div className="grid md:grid-cols-3 gap-12">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { title: "High Commission", desc: "Earn up to 30% commission on every new member you refer to the platform.", icon: "💰" },
-                            { title: "Real-time Tracking", desc: "Monitor your clicks, signups, and earnings in real-time through your dedicated dashboard.", icon: "📊" },
-                            { title: "Marketing Tools", desc: "Access high-quality banners, social assets, and custom links to help you promote.", icon: "🚀" },
-                        ].map((feature, idx) => (
-                            <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:border-[#d4af37]/30 transition-colors">
-                                <div className="text-4xl mb-4">{feature.icon}</div>
-                                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
-                                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+                            { label: "Commission Rate", value: "30%", icon: TrendingUp },
+                            { label: "Cookie Duration", value: "30 Days", icon: Gift },
+                            { label: "Active Partners", value: "1,200+", icon: Users },
+                            { label: "Payout Frequency", value: "Weekly", icon: ShieldCheck },
+                        ].map((stat, i) => (
+                            <div key={i} className="flex flex-col items-center text-center">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-4">
+                                    <stat.icon size={24} className="text-[#d4af37]" />
+                                </div>
+                                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* How It Works */}
-            <section className="py-24 bg-white">
+            {/* 💎 Program Highlights */}
+            <section className="py-24">
                 <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold mb-4">How It Works</h2>
-                        <p className="text-gray-500 text-lg">Simple steps to start earning today.</p>
-                    </div>
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                                Professional Tools for <br />
+                                <span className="text-[#d4af37]">Ambitious Partners</span>
+                            </h2>
+                            <p className="text-gray-500 mb-10 leading-relaxed max-w-lg">
+                                We provide everything you need to succeed, from high-converting creative assets to a real-time dashboard that tracks every click and conversion.
+                            </p>
 
-                    <div className="relative">
-                        {/* Line */}
-                        <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -translate-y-1/2 z-0"></div>
-
-                        <div className="grid md:grid-cols-4 gap-8 relative z-10">
-                            {[
-                                { step: "01", title: "Sign Up", desc: "Complete the simple registration form." },
-                                { step: "02", title: "Get Link", desc: "Generate your unique tracking URL." },
-                                { step: "03", title: "Promote", desc: "Share on social media, blogs, or email." },
-                                { step: "04", title: "Earn", desc: "Get paid for every qualified referral." },
-                            ].map((item, idx) => (
-                                <div key={idx} className="bg-white p-6 text-center">
-                                    <div className="w-16 h-16 mx-auto bg-black text-white rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-gray-200">
-                                        {item.step}
+                            <div className="space-y-4">
+                                {[
+                                    { title: "Real-time Tracking", desc: "Instant attribution for every click and registration.", icon: BarChart3 },
+                                    { title: "Marketing Kit", desc: "Access professional banners and social media assets.", icon: Globe },
+                                    { title: "Dedicated Support", desc: "Our team is here to help you optimize your growth.", icon: ShieldCheck }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex gap-4">
+                                        <div className="mt-1">
+                                            <CheckCircle2 size={20} className="text-green-500" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-gray-900">{item.title}</h3>
+                                            <p className="text-sm text-gray-500">{item.desc}</p>
+                                        </div>
                                     </div>
-                                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                                    <p className="text-gray-500">{item.desc}</p>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-inner overflow-hidden relative group">
+                            <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-6 relative z-10">
+                                <div className="flex justify-between items-center mb-8">
+                                    <div className="text-sm font-bold text-gray-900 uppercase">Revenue Projection</div>
+                                    <TrendingUp size={18} className="text-green-500" />
                                 </div>
-                            ))}
+                                <div className="space-y-4">
+                                    {[80, 50, 95, 65].map((w, i) => (
+                                        <div key={i} className="w-full bg-gray-50 h-2 rounded-full overflow-hidden">
+                                            <div className="bg-[#d4af37] h-full rounded-full transition-all duration-1000 group-hover:bg-[#bfa030]" style={{ width: `${w}%` }}></div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+                                    <div className="text-3xl font-bold text-gray-900">$4,250.00</div>
+                                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Monthly Average Earnings</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* CTA Footer */}
-            <section className="py-20 bg-[#1a1a1a] text-white text-center">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-8">Ready to start earning?</h2>
-                    <Link to="/affiliate/register" className="inline-block bg-[#d4af37] text-black px-10 py-4 rounded-full font-bold text-lg hover:bg-[#c29f2d] transition-colors shadow-lg shadow-[#d4af37]/20">
-                        Join the Program Now
+            {/* 🏁 CTA Section */}
+            <section className="py-24 bg-gray-900 text-white text-center relative overflow-hidden">
+                <div className="container mx-auto px-6 relative z-10">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-8">Ready to grow with us?</h2>
+                    <p className="text-gray-400 mb-12 max-w-xl mx-auto">
+                        Join hundreds of successful partners who are earning sustainable income by sharing the vision of AVA.
+                    </p>
+                    <Link
+                        to="/affiliate/register"
+                        className="inline-flex items-center gap-2 bg-[#d4af37] text-white px-12 py-4 rounded-lg font-bold text-lg hover:bg-[#bfa030] transition-all"
+                    >
+                        Apply Now
+                        <ArrowRight size={20} />
                     </Link>
                 </div>
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[#d4af37] opacity-[0.03] rounded-full blur-[100px]"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#d4af37] opacity-[0.03] rounded-full blur-[100px]"></div>
             </section>
+
+            {/* Footer */}
+            <footer className="py-12 border-t border-gray-100 text-center">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    &copy; 2026 AVA Affiliate • Professional Partnership Program
+                </p>
+            </footer>
         </div>
     );
 }
+

@@ -44,6 +44,10 @@ import AffiliateCommissions from "@/pages/affiliate/dashboard/AffiliateCommissio
 import AffiliatePromotions from "@/pages/affiliate/dashboard/AffiliatePromotions";
 import AffiliateSettings from "@/pages/affiliate/dashboard/AffiliateSettings";
 
+// Admin Panel
+import AdminLayout from "@/layouts/admin/AdminLayout";
+import AdminAffiliateList from "@/pages/admin/affiliate/AdminAffiliateList";
+
 export const router = createBrowserRouter([
   // 🌐 PUBLIC SITE (with Navbar + Footer)
   {
@@ -124,6 +128,20 @@ export const router = createBrowserRouter([
           { path: "settings", element: <AffiliateSettings /> },
         ]
       }
+    ]
+  },
+
+  // 👑 ADMIN PANEL
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { path: "dashboard", element: <AdminAffiliateList /> }, // Temporary placeholder
+      { path: "affiliates", element: <AdminAffiliateList /> },
+      { path: "commissions", element: <AdminAffiliateList /> }, // Temporary placeholder
+      { path: "payouts", element: <AdminAffiliateList /> }, // Temporary placeholder
+      { path: "analytics", element: <AdminAffiliateList /> }, // Temporary placeholder
+      { path: "settings", element: <AdminAffiliateList /> }, // Temporary placeholder
     ]
   },
 
