@@ -7,7 +7,8 @@ import {
     ChevronRight,
     Copy,
     Clock,
-    Gift
+    Gift,
+    Info
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -68,11 +69,25 @@ export default function AffiliateOverview() {
                 </div>
             </div>
 
+            {/* ℹ️ Payout Notice */}
+            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-4">
+                <div className="bg-blue-500/10 p-2 rounded-lg mt-0.5">
+                    <Info size={18} className="text-blue-600" />
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold text-blue-900">Commission Payout Policy</h3>
+                    <p className="text-sm text-blue-700 mt-0.5">
+                        Please note that payments are processed only once a minimum threshold of <span className="font-bold">€100</span> in commissions is reached.
+                        Once reached, you can request a payout to your preferred payment method.
+                    </p>
+                </div>
+            </div>
+
             {/* 📊 Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { label: "Net Earnings", value: "$4,250.00", change: "+12.5%", icon: DollarSign, color: "text-green-600", bgColor: "bg-green-50" },
-                    { label: "Pending Payout", value: "$350.00", change: "In Review", icon: Clock, color: "text-orange-600", bgColor: "bg-orange-50" },
+                    { label: "Net Earnings", value: "€4,250.00", change: "+12.5%", icon: DollarSign, color: "text-green-600", bgColor: "bg-green-50" },
+                    { label: "Pending Payout", value: "€350.00", change: "In Review", icon: Clock, color: "text-orange-600", bgColor: "bg-orange-50" },
                     { label: "Direct Referrals", value: "128", change: "+5 today", icon: Users, color: "text-blue-600", bgColor: "bg-blue-50" },
                     { label: "Global ROI", value: "24.8%", change: "Optimized", icon: Activity, color: "text-[#d4af37]", bgColor: "bg-[#d4af37]/10" },
                 ].map((stat, index) => (

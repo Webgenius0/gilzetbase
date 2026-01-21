@@ -5,7 +5,8 @@ import {
     ChevronDown,
     Wallet,
     Search,
-    X
+    X,
+    Info
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -15,7 +16,9 @@ export default function AffiliateCommissions() {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const handleExport = () => toast.success("Exporting transaction data...");
-    const handlePayoutRequest = () => toast.info("Payout request form coming soon");
+    const handlePayoutRequest = () => {
+        toast.error("Minimum payout threshold of €100 not reached or request form coming soon.");
+    };
 
     const transactions = [
         { id: "#TRX-9823", date: "Oct 24, 2025", desc: "Premium Registration Commission", amount: 25.00, status: "Approved", type: "credit" },
@@ -41,6 +44,17 @@ export default function AffiliateCommissions() {
                     <p className="text-gray-500 text-sm">Review your earnings and withdrawal history.</p>
                 </div>
 
+                {/* Payout Threshold Info */}
+                <div className="flex items-center gap-3 bg-blue-50 border border-blue-100 px-4 py-2 rounded-lg">
+                    <div className="bg-blue-500/10 p-1.5 rounded-full">
+                        <Info size={16} className="text-blue-600" />
+                    </div>
+                    <div>
+                        <p className="text-xs font-semibold text-blue-900">Payout Threshold</p>
+                        <p className="text-[11px] text-blue-700">Minimum balance of <span className="font-bold">€100</span> required for withdrawal.</p>
+                    </div>
+                </div>
+
                 <div className="flex items-center gap-2">
                     <button
                         onClick={handleExport}
@@ -56,6 +70,47 @@ export default function AffiliateCommissions() {
                         <Wallet size={16} />
                         Request Payout
                     </button>
+                </div>
+            </div>
+
+            {/* 💰 Quick Stats / Balance */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-green-50 text-green-600 rounded-lg">
+                            <Wallet size={20} />
+                        </div>
+                        <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">Available Balance</span>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900">€425.00</div>
+                    <div className="mt-2 flex items-center gap-2">
+                        <div className="h-1.5 flex-1 bg-gray-100 rounded-full overflow-hidden">
+                            <div className="h-full bg-green-500 rounded-full" style={{ width: '100%' }}></div>
+                        </div>
+                        <span className="text-[10px] font-bold text-green-600 uppercase tracking-wider">Threshold Met</span>
+                    </div>
+                </div>
+
+                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                            <Info size={20} />
+                        </div>
+                        <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">Next Payout</span>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900">€100.00</div>
+                    <p className="text-xs text-gray-500 mt-2">Minimum required for withdrawal</p>
+                </div>
+
+                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-orange-50 text-orange-600 rounded-lg">
+                            <Search size={20} />
+                        </div>
+                        <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">Pending Review</span>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900">€25.00</div>
+                    <p className="text-xs text-gray-500 mt-2">Commissions waiting for approval</p>
                 </div>
             </div>
 
