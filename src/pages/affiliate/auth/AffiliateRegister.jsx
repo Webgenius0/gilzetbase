@@ -13,17 +13,25 @@ export default function AffiliateRegister() {
         userType: 'Photographer',
         promotionChannels: '',
         password: '',
+        acceptedTerms: false,
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
             toast.error("Please fill in all required fields");
+            return;
+        }
+        if (!formData.acceptedTerms) {
+            toast.error("You must accept the terms and conditions to register");
             return;
         }
         setIsLoading(true);
@@ -144,6 +152,22 @@ export default function AffiliateRegister() {
                                     className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-[#d4af37] focus:border-[#d4af37] outline-none text-sm transition-all"
                                 />
                             </div>
+                        </div>
+
+                        <div className="flex items-start gap-3 pt-2">
+                            <div className="flex items-center h-5">
+                                <input
+                                    id="acceptedTerms"
+                                    name="acceptedTerms"
+                                    type="checkbox"
+                                    checked={formData.acceptedTerms}
+                                    onChange={handleChange}
+                                    className="w-5 h-5 text-[#d4af37] border-gray-300 rounded focus:ring-[#d4af37] cursor-pointer"
+                                />
+                            </div>
+                            <label htmlFor="acceptedTerms" className="text-sm text-gray-600 cursor-pointer select-none leading-tight">
+                                I have read and agree to the <Link to="/terms" className="text-[#d4af37] font-bold hover:underline">Affiliate Program Terms & Conditions</Link>. I understand that any violation of these terms may result in account termination.
+                            </label>
                         </div>
 
                         <div className="pt-4">

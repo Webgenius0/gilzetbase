@@ -19,6 +19,12 @@ export default function AffiliateOverview() {
         toast.success("Affiliate link copied to clipboard!");
     };
 
+    const copyFullScript = () => {
+        const script = `<a href="${affiliateLink}" target="_blank" rel="noopener noreferrer">Visit Taranga Market</a>`;
+        navigator.clipboard.writeText(script);
+        toast.success("Full HTML script copied!");
+    };
+
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -50,6 +56,13 @@ export default function AffiliateOverview() {
                         >
                             <Copy size={18} />
                             <span>Copy Link</span>
+                        </button>
+                        <button
+                            onClick={copyFullScript}
+                            className="bg-gray-900 hover:bg-black text-white px-6 py-3 rounded-lg transition-colors flex items-center gap-2 font-medium w-full sm:w-auto justify-center whitespace-nowrap"
+                        >
+                            <TrendingUp size={18} />
+                            <span>Copy Full Script</span>
                         </button>
                     </div>
                 </div>
