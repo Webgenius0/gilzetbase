@@ -16,11 +16,17 @@ export default function JuryDashboard() {
 
     // Sync votedCandidates with API data
     useEffect(() => {
-        if (scoresResponse?.data?.data) {
+        const dataArray = scoresResponse?.data?.data?.data;
+        if (dataArray) {
             const initialVotes = {};
-            scoresResponse.data.data.forEach(item => {
-                if (item.score > 0) {
-                    initialVotes[item.competition_id] = item.score;
+            dataArray.forEach(item => {
+                // Check if there's a score assigned by the current jury
+                const scoreObj = item.scores?.[0];
+                if (scoreObj) {
+                    initialVotes[item.id] = {
+                        score: scoreObj.score,
+                        scoreId: scoreObj.id
+                    };
                 }
             });
             setVotedCandidates(initialVotes);
@@ -33,7 +39,10 @@ export default function JuryDashboard() {
                 if (res.status) {
                     setVotedCandidates(prev => ({
                         ...prev,
-                        [competition_id]: score
+                        [competition_id]: {
+                            score: score,
+                            scoreId: res.data?.id // Update with new ID from response
+                        }
                     }));
                 }
             }
@@ -41,12 +50,18 @@ export default function JuryDashboard() {
     };
 
     const handleResetScore = (item) => {
-        deleteScore(item.id, {
+        const scoreId = votedCandidates[item.id]?.scoreId;
+        if (!scoreId) {
+            toast.error("Evaluation record not found");
+            return;
+        }
+
+        deleteScore(scoreId, {
             onSuccess: (res) => {
                 if (res.status) {
                     setVotedCandidates(prev => {
                         const newVoted = { ...prev };
-                        delete newVoted[item.competition_id];
+                        delete newVoted[item.id];
                         return newVoted;
                     });
                 }
@@ -54,7 +69,7 @@ export default function JuryDashboard() {
         });
     };
 
-    const candidates = scoresResponse?.data?.data || [];
+    const candidates = scoresResponse?.data?.data?.data || [];
     const standings = standingResponse?.data || [];
 
     const progress = candidates.length > 0
@@ -113,8 +128,7 @@ export default function JuryDashboard() {
             {/* Grid Layout - Submissions to score */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 {candidates.map((item) => {
-                    const candidate = item.competition;
-                    const photoUrl = item.competition_image?.image || candidate?.category?.image || "https://via.placeholder.com/800x1000?text=No+Image";
+                    const photoUrl = item.competition_images?.[0]?.image || item.category?.image || "https://via.placeholder.com/800x1000?text=No+Image";
 
                     return (
                         <div
@@ -145,23 +159,23 @@ export default function JuryDashboard() {
 
                                 <div className="absolute top-6 left-6">
                                     <div className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white text-xs font-bold tracking-widest uppercase">
-                                        {candidate?.category?.name || "Uncategorized"}
+                                        {item.category?.name || "Uncategorized"}
                                     </div>
                                 </div>
 
                                 <Link to={`/jury/dashboard/${item.id}`} className="absolute bottom-6 left-8 right-8 text-white group/info">
-                                    <div className="text-xs font-medium text-[#d4af37] mb-1 group-hover/info:translate-x-1 transition-transform">ID: #{candidate?.id.toString().padStart(4, '0')}</div>
-                                    <h3 className="text-2xl font-bold group-hover/info:text-[#d4af37] transition-colors line-clamp-1">{candidate?.photo_title || `Submission #${candidate?.id}`}</h3>
+                                    <div className="text-xs font-medium text-[#d4af37] mb-1 group-hover/info:translate-x-1 transition-transform">ID: #{item.id.toString().padStart(4, '0')}</div>
+                                    <h3 className="text-2xl font-bold group-hover/info:text-[#d4af37] transition-colors line-clamp-1">{item.photo_title || `Submission #${item.id}`}</h3>
                                 </Link>
 
-                                {votedCandidates[item.competition_id] && (
+                                {votedCandidates[item.id] && (
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] z-20">
                                         <div className="bg-white rounded-3xl p-8 flex flex-col items-center shadow-2xl scale-100 transition-transform duration-300">
                                             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                                                 <CheckCircle className="text-green-500 w-10 h-10" />
                                             </div>
                                             <div className="text-gray-500 text-sm font-medium uppercase tracking-widest mb-1">Your Score</div>
-                                            <div className="text-5xl font-black text-gray-900 mb-4">{votedCandidates[item.competition_id]}<span className="text-xl text-gray-400">/20</span></div>
+                                            <div className="text-5xl font-black text-gray-900 mb-4">{votedCandidates[item.id].score}<span className="text-xl text-gray-400">/20</span></div>
                                             <button
                                                 disabled={isDeleting}
                                                 onClick={() => handleResetScore(item)}
@@ -194,8 +208,8 @@ export default function JuryDashboard() {
                                         <button
                                             key={score}
                                             disabled={isUpdating}
-                                            onClick={() => handleVote(item.competition_id, score)}
-                                            className={`h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-300 ${votedCandidates[item.competition_id] === score
+                                            onClick={() => handleVote(item.id, score)}
+                                            className={`h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-300 ${votedCandidates[item.id]?.score === score
                                                 ? "bg-[#d4af37] text-white shadow-lg shadow-[#d4af37]/40 ring-2 ring-[#d4af37] ring-offset-2"
                                                 : "bg-[#f8f9fa] text-gray-600 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
                                                 } disabled:opacity-50`}

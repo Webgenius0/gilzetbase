@@ -2,27 +2,27 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosPrivate } from "@/configs/axios.config";
 import toast from "react-hot-toast";
 
-// Get all scores assigned to/done by the jury
+// Get all submissions available for jury evaluation
 export const useGetScores = (page = 1) => {
     return useQuery({
         queryKey: ["jury-scores", page],
         queryFn: async () => {
-            const res = await axiosPrivate.get(`/scores?page=${page}`);
+            const res = await axiosPrivate.get(`/vote-jury?page=${page}`);
             return res.data;
         },
     });
 };
 
 // Get specific score details
-export const useGetScoreDetails = (id) => {
+export const useGetScoreDetails = (competition_id) => {
     return useQuery({
-        queryKey: ["jury-score-details", id],
+        queryKey: ["jury-score-details", competition_id],
         queryFn: async () => {
-            if (!id) return null;
-            const res = await axiosPrivate.get(`/scores/${id}`);
+            if (!competition_id) return null;
+            const res = await axiosPrivate.get(`/vote-jury/${competition_id}`);
             return res.data;
         },
-        enabled: !!id,
+        enabled: !!competition_id,
     });
 };
 

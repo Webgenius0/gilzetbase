@@ -8,8 +8,7 @@ export default function JuryPhotoDetails() {
     const { data: response, isLoading } = useGetScoreDetails(id);
 
     const details = response?.data;
-    const competition = details?.competition;
-    const photoUrl = details?.competition_image?.image || competition?.category?.image || "https://via.placeholder.com/1200x800?text=No+Image";
+    const photoUrl = details?.competition_images?.[0]?.image || details?.category?.image || "https://via.placeholder.com/1200x800?text=No+Image";
 
     if (isLoading) {
         return (
@@ -53,7 +52,7 @@ export default function JuryPhotoDetails() {
                     <div className="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 p-2">
                         <img
                             src={photoUrl}
-                            alt={competition?.photo_title || "Art Submission"}
+                            alt={details?.photo_title || "Art Submission"}
                             className="w-full h-auto object-cover rounded-[2rem]"
                         />
                     </div>
@@ -68,10 +67,10 @@ export default function JuryPhotoDetails() {
                         </h2>
 
                         <div className="space-y-8">
-                            {/* Title (Added this as it was missing from original mock layout) */}
+                            {/* Title */}
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Photo Title</label>
-                                <h3 className="text-xl font-bold text-gray-800">{competition?.photo_title || "Untitled Artwork"}</h3>
+                                <h3 className="text-xl font-bold text-gray-800">{details?.photo_title || "Untitled Artwork"}</h3>
                             </div>
 
                             {/* Category */}
@@ -81,7 +80,7 @@ export default function JuryPhotoDetails() {
                                     <span>Category</span>
                                 </div>
                                 <div className="px-5 py-2 bg-amber-50 text-[#d4af37] text-xs font-black rounded-xl inline-block border border-amber-100 uppercase tracking-wider">
-                                    {competition?.category?.name || "General Selection"}
+                                    {details?.category?.name || "General Selection"}
                                 </div>
                             </div>
 
@@ -92,7 +91,7 @@ export default function JuryPhotoDetails() {
                                     <span>Photo Description</span>
                                 </div>
                                 <p className="text-gray-600 leading-relaxed text-sm">
-                                    {competition?.photo_description || competition?.description || "No description provided for this submission."}
+                                    {details?.photo_description || details?.description || "No description provided for this submission."}
                                 </p>
                             </div>
 
@@ -103,8 +102,8 @@ export default function JuryPhotoDetails() {
                                     <span>Submission Date</span>
                                 </div>
                                 <p className="text-gray-500 font-medium">
-                                    {details?.updated_at
-                                        ? new Date(details.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                                    {details?.created_at
+                                        ? new Date(details.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
                                         : "Recently Submitted"}
                                 </p>
                             </div>
