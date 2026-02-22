@@ -7,9 +7,12 @@ import LogoImg from "@/assets/Logo.png";
 
 import { useLogin } from "@/hooks/auth.hook";
 
+import { useNavigate } from "react-router";
+
 const LoginDialog = ({ switchToRegister, switchToForgot, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: login, isPending } = useLogin();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -22,6 +25,12 @@ const LoginDialog = ({ switchToRegister, switchToForgot, onClose }) => {
       onSuccess: (res) => {
         if (res.status) {
           if (onClose) onClose();
+          // Role-based redirection
+          if (res.data?.role === "jury") {
+            navigate("/jury/dashboard");
+          } else {
+            navigate("/dashboard");
+          }
         }
       },
     });

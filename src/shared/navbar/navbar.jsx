@@ -100,7 +100,7 @@ export default function Navbar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-zinc-800" />
                 <DropdownMenuItem asChild className="focus:bg-zinc-800 focus:text-yellow-600 cursor-pointer">
-                  <Link to="/dashboard" className="flex w-full items-center">
+                  <Link to={user?.role === "jury" ? "/jury/dashboard" : "/dashboard"} className="flex w-full items-center">
                     <LayoutDashboard className="mr-2 h-4 w-4" />
                     <span>Dashboard</span>
                   </Link>
@@ -167,7 +167,7 @@ export default function Navbar() {
                       <div className="text-xs text-muted-foreground">{user?.email}</div>
                     </div>
                     <Link
-                      to="/dashboard"
+                      to={user?.role === "jury" ? "/jury/dashboard" : "/dashboard"}
                       onClick={() => setOpen(false)}
                       className="flex items-center text-sm text-gray-300 hover:text-yellow-600 transition-colors py-2"
                     >

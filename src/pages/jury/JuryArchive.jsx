@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { Info } from "lucide-react";
 
 const YEARS = [2026, 2025, 2024, 2023];
 const MONTHS = [
@@ -123,31 +124,52 @@ export default function JuryArchive() {
                             <div key={item.id} className="group relative bg-white rounded-lg border border-gray-100 hover:shadow-lg transition-all overflow-hidden">
                                 <div className="aspect-[4/3] bg-gray-200 relative overflow-hidden">
                                     <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
+                                    {/* Hover Overlay */}
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                        <Link
+                                            to={`/jury/dashboard/${item.id}`}
+                                            className="bg-white text-gray-900 px-4 py-2 rounded-full text-xs font-bold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#d4af37] hover:text-white"
+                                        >
+                                            VIEW DETAILS
+                                        </Link>
+                                    </div>
+
                                     <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
                                         ★ {item.score}
                                     </div>
                                 </div>
                                 <div className="p-3">
-                                    <p className="text-xs text-[#d4af37] font-semibold uppercase">{item.category}</p>
+                                    <div className="flex items-center justify-between">
+                                        <p className="text-[10px] text-[#d4af37] font-bold uppercase tracking-wider">{item.category}</p>
+                                        <Link to={`/jury/dashboard/${item.id}`} className="text-gray-400 hover:text-[#d4af37] transition-colors">
+                                            <Info size={14} />
+                                        </Link>
+                                    </div>
                                     <h3 className="text-sm font-medium text-gray-900 mt-1 truncate">{item.title}</h3>
-                                    <p className="text-xs text-gray-500 mt-1">{item.year} • {item.month}</p>
+                                    <p className="text-xs text-gray-400 mt-1">{item.year} • {item.month}</p>
                                 </div>
                             </div>
                         ) : (
                             // List Item
-                            <div key={item.id} className="flex items-center gap-4 p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
+                            <div key={item.id} className="flex items-center gap-4 p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors group">
                                 <div className="h-16 w-24 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                                    <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
+                                    <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                                 </div>
                                 <div className="flex-1">
                                     <h3 className="text-sm font-medium text-gray-900">{item.title}</h3>
-                                    <p className="text-xs text-gray-500">{item.category} • {item.month} {item.year}</p>
+                                    <p className="text-xs text-gray-400">{item.category} • {item.month} {item.year}</p>
                                 </div>
                                 <div className="text-right px-4">
-                                    <span className="block text-lg font-bold text-gray-800">{item.score}</span>
-                                    <span className="text-xs text-gray-400">Score</span>
+                                    <span className="block text-lg font-bold text-gray-800">★ {item.score}</span>
+                                    <span className="text-[10px] text-gray-400 uppercase font-black">Final Score</span>
                                 </div>
-                                <button className="px-3 py-1.5 text-xs border border-gray-300 rounded hover:bg-gray-100">View Details</button>
+                                <Link
+                                    to={`/jury/dashboard/${item.id}`}
+                                    className="px-4 py-2 text-xs font-bold bg-white border border-gray-200 rounded-lg hover:bg-black hover:text-white hover:border-black transition-all"
+                                >
+                                    VIEW DETAILS
+                                </Link>
                             </div>
                         )
                     ))}

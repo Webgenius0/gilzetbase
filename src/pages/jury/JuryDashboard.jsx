@@ -1,52 +1,76 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { toast } from "react-hot-toast";
-import { CheckCircle, Info, Star, ChevronRight, Maximize2 } from "lucide-react";
-
-const MOCK_CANDIDATES = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    photoUrl: `https://images.unsplash.com/photo-${[
-        "1500648767791-00dcc994a43e",
-        "1506794778202-cad84cf45f1d",
-        "1534528741775-53994a69daeb",
-        "1507003211169-0a1dd7228f2d",
-        "1494790108377-be9c29b29330",
-        "1524504388940-b1c1722653e1",
-        "1521119989659-a83eee488004",
-        "1531746020798-e6953c6e8e04",
-        "1488426862026-3ee34a7d66df",
-        "1539571696357-5a69c17a67c6",
-        "1517841905240-472988babdf9",
-        "1524250502761-1ac6f2e30d43"
-    ][i % 12]}?auto=format&fit=crop&q=80&w=800`,
-    category: ["Digital Art", "Oil Painting", "Photography"][i % 3],
-    title: `Submission #${1000 + i + 1}`
-}));
+import { CheckCircle, Info, Star, ChevronRight, Maximize2, Loader2 } from "lucide-react";
+import { useGetScores, useUpdateScore, useGetGlobalStanding, useDeleteScore } from "@/hooks/jury.hook";
 
 export default function JuryDashboard() {
-    const [candidates, setCandidates] = useState(MOCK_CANDIDATES);
+    const { data: scoresResponse, isLoading: isLoadingScores } = useGetScores();
+    const { data: standingResponse, isLoading: isLoadingStanding } = useGetGlobalStanding();
+    const { mutate: updateScore, isPending: isUpdating } = useUpdateScore();
+
+    const { mutate: deleteScore, isPending: isDeleting } = useDeleteScore();
+
     const [votedCandidates, setVotedCandidates] = useState({});
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleVote = (id, score) => {
-        setVotedCandidates((prev) => ({
-            ...prev,
-            [id]: score,
-        }));
-        toast.success(`Score of ${score} recorded!`, {
-            style: {
-                borderRadius: '10px',
-                background: '#333',
-                color: '#fff',
-            },
-            iconTheme: {
-                primary: '#d4af37',
-                secondary: '#fff',
-            },
+    // Sync votedCandidates with API data
+    useEffect(() => {
+        if (scoresResponse?.data?.data) {
+            const initialVotes = {};
+            scoresResponse.data.data.forEach(item => {
+                if (item.score > 0) {
+                    initialVotes[item.competition_id] = item.score;
+                }
+            });
+            setVotedCandidates(initialVotes);
+        }
+    }, [scoresResponse]);
+
+    const handleVote = (competition_id, score) => {
+        updateScore({ competition_id, score }, {
+            onSuccess: (res) => {
+                if (res.status) {
+                    setVotedCandidates(prev => ({
+                        ...prev,
+                        [competition_id]: score
+                    }));
+                }
+            }
         });
     };
 
-    const progress = Math.round((Object.keys(votedCandidates).length / candidates.length) * 100);
+    const handleResetScore = (item) => {
+        deleteScore(item.id, {
+            onSuccess: (res) => {
+                if (res.status) {
+                    setVotedCandidates(prev => {
+                        const newVoted = { ...prev };
+                        delete newVoted[item.competition_id];
+                        return newVoted;
+                    });
+                }
+            }
+        });
+    };
+
+    const candidates = scoresResponse?.data?.data || [];
+    const standings = standingResponse?.data || [];
+
+    const progress = candidates.length > 0
+        ? Math.round((Object.keys(votedCandidates).length / candidates.length) * 100)
+        : 0;
+
+    if (isLoadingScores || isLoadingStanding) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="flex flex-col items-center gap-4">
+                    <Loader2 className="w-10 h-10 animate-spin text-[#d4af37]" />
+                    <p className="text-gray-500 font-medium">Initializing Jury Terminal...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 md:px-6 pb-20">
@@ -86,115 +110,116 @@ export default function JuryDashboard() {
                 <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl"></div>
             </div>
 
-            {/* Grid Layout - 2 columns for larger images */}
+            {/* Grid Layout - Submissions to score */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {candidates.map((candidate, index) => (
-                    <div
-                        key={candidate.id}
-                        className="group bg-white rounded-[2rem] overflow-hidden shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] transition-all duration-500 border border-gray-100 flex flex-col"
-                    >
-                        {/* Image Container - Larger & Dynamic */}
-                        <div className="relative aspect-[4/5] overflow-hidden bg-gray-900">
-                            <Link to={`/jury/dashboard/${candidate.id}`} className="block w-full h-full cursor-pointer">
-                                <img
-                                    src={candidate.photoUrl}
-                                    alt="Candidate Submission"
-                                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                                    loading="lazy"
-                                />
-                            </Link>
+                {candidates.map((item) => {
+                    const candidate = item.competition;
+                    const photoUrl = item.competition_image?.image || candidate?.category?.image || "https://via.placeholder.com/800x1000?text=No+Image";
 
-                            {/* Premium Overlays */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                    return (
+                        <div
+                            key={item.id}
+                            className="group bg-white rounded-[2rem] overflow-hidden shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] transition-all duration-500 border border-gray-100 flex flex-col"
+                        >
+                            <div className="relative aspect-[4/5] overflow-hidden bg-gray-900">
+                                <Link to={`/jury/dashboard/${item.id}`} className="block w-full h-full cursor-pointer">
+                                    <img
+                                        src={photoUrl}
+                                        alt="Candidate Submission"
+                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                        loading="lazy"
+                                    />
+                                </Link>
 
-                            {/* Quick Actions */}
-                            <div className="absolute top-6 right-6 flex gap-2">
-                                <button
-                                    onClick={() => setSelectedImage(candidate.photoUrl)}
-                                    className="p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-[#d4af37] transition-colors duration-300"
-                                    title="View Fullscreen"
-                                >
-                                    <Maximize2 size={20} />
-                                </button>
-                            </div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            {/* Badge */}
-                            <div className="absolute top-6 left-6">
-                                <div className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white text-xs font-bold tracking-widest uppercase">
-                                    {candidate.category}
-                                </div>
-                            </div>
-
-                            {/* Info on bottom of image */}
-                            <Link to={`/jury/dashboard/${candidate.id}`} className="absolute bottom-6 left-8 right-8 text-white group/info">
-                                <div className="text-xs font-medium text-[#d4af37] mb-1 group-hover/info:translate-x-1 transition-transform">ID: #{candidate.id.toString().padStart(4, '0')}</div>
-                                <h3 className="text-2xl font-bold group-hover/info:text-[#d4af37] transition-colors">{candidate.title}</h3>
-                            </Link>
-
-                            {/* Score Checkmark */}
-                            {votedCandidates[candidate.id] && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] z-20">
-                                    <div
-                                        className="bg-white rounded-3xl p-8 flex flex-col items-center shadow-2xl scale-100 transition-transform duration-300"
+                                <div className="absolute top-6 right-6 flex gap-2">
+                                    <button
+                                        onClick={() => setSelectedImage(photoUrl)}
+                                        className="p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-[#d4af37] transition-colors duration-300"
+                                        title="View Fullscreen"
                                     >
-                                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                                            <CheckCircle className="text-green-500 w-10 h-10" />
-                                        </div>
-                                        <div className="text-gray-500 text-sm font-medium uppercase tracking-widest mb-1">Your Score</div>
-                                        <div className="text-5xl font-black text-gray-900 mb-4">{votedCandidates[candidate.id]}<span className="text-xl text-gray-400">/20</span></div>
-                                        <button
-                                            onClick={() => setVotedCandidates(prev => {
-                                                const newVoted = { ...prev };
-                                                delete newVoted[candidate.id];
-                                                return newVoted;
-                                            })}
-                                            className="text-[#d4af37] font-semibold text-sm hover:underline"
-                                        >
-                                            Change Score
-                                        </button>
+                                        <Maximize2 size={20} />
+                                    </button>
+                                </div>
+
+                                <div className="absolute top-6 left-6">
+                                    <div className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white text-xs font-bold tracking-widest uppercase">
+                                        {candidate?.category?.name || "Uncategorized"}
                                     </div>
                                 </div>
-                            )}
-                        </div>
 
-                        {/* Voting Controls - Compact grid for 1-20 */}
-                        <div className="p-8 bg-white">
-                            <div className="flex items-center gap-2 mb-6">
-                                <Star className="text-[#d4af37] fill-[#d4af37] w-5 h-5" />
-                                <span className="font-bold text-gray-800 tracking-tight">Assign Score (1 - 20)</span>
+                                <Link to={`/jury/dashboard/${item.id}`} className="absolute bottom-6 left-8 right-8 text-white group/info">
+                                    <div className="text-xs font-medium text-[#d4af37] mb-1 group-hover/info:translate-x-1 transition-transform">ID: #{candidate?.id.toString().padStart(4, '0')}</div>
+                                    <h3 className="text-2xl font-bold group-hover/info:text-[#d4af37] transition-colors line-clamp-1">{candidate?.photo_title || `Submission #${candidate?.id}`}</h3>
+                                </Link>
+
+                                {votedCandidates[item.competition_id] && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] z-20">
+                                        <div className="bg-white rounded-3xl p-8 flex flex-col items-center shadow-2xl scale-100 transition-transform duration-300">
+                                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                                <CheckCircle className="text-green-500 w-10 h-10" />
+                                            </div>
+                                            <div className="text-gray-500 text-sm font-medium uppercase tracking-widest mb-1">Your Score</div>
+                                            <div className="text-5xl font-black text-gray-900 mb-4">{votedCandidates[item.competition_id]}<span className="text-xl text-gray-400">/20</span></div>
+                                            <button
+                                                disabled={isDeleting}
+                                                onClick={() => handleResetScore(item)}
+                                                className="text-[#d4af37] font-semibold text-sm hover:underline disabled:opacity-50"
+                                            >
+                                                {isDeleting ? "Processing..." : "Change Score"}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
-                            <div className="grid grid-cols-5 gap-3">
-                                {Array.from({ length: 20 }, (_, i) => i + 1).map((score) => (
-                                    <button
-                                        key={score}
-                                        onClick={() => handleVote(candidate.id, score)}
-                                        className={`h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-300 ${votedCandidates[candidate.id] === score
-                                            ? "bg-[#d4af37] text-white shadow-lg shadow-[#d4af37]/40 ring-2 ring-[#d4af37] ring-offset-2"
-                                            : "bg-[#f8f9fa] text-gray-600 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
-                                            }`}
+                            <div className="p-8 bg-white">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="flex items-center gap-2">
+                                        <Star className="text-[#d4af37] fill-[#d4af37] w-5 h-5" />
+                                        <span className="font-bold text-gray-800 tracking-tight">Assign Score (1 - 20)</span>
+                                    </div>
+                                    <Link
+                                        to={`/jury/dashboard/${item.id}`}
+                                        className="flex items-center gap-1.5 text-xs font-bold text-[#d4af37] hover:underline transition-all"
                                     >
-                                        {score}
-                                    </button>
-                                ))}
-                            </div>
-
-                            <div className="mt-8 flex justify-between items-center text-xs text-gray-400 font-medium">
-                                <div className="flex items-center gap-1">
-                                    <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                                    <span>Verified Entry</span>
+                                        <Info size={14} />
+                                        VIEW DETAILS
+                                    </Link>
                                 </div>
-                                <span>UNBIASED VOTING SYSTEM</span>
+
+                                <div className="grid grid-cols-5 gap-3">
+                                    {Array.from({ length: 20 }, (_, i) => i + 1).map((score) => (
+                                        <button
+                                            key={score}
+                                            disabled={isUpdating}
+                                            onClick={() => handleVote(item.competition_id, score)}
+                                            className={`h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-300 ${votedCandidates[item.competition_id] === score
+                                                ? "bg-[#d4af37] text-white shadow-lg shadow-[#d4af37]/40 ring-2 ring-[#d4af37] ring-offset-2"
+                                                : "bg-[#f8f9fa] text-gray-600 hover:bg-[#d4af37]/10 hover:text-[#d4af37]"
+                                                } disabled:opacity-50`}
+                                        >
+                                            {score}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <div className="mt-8 flex justify-between items-center text-xs text-gray-400 font-medium">
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                                        <span>Verified Entry</span>
+                                    </div>
+                                    <span>UNBIASED VOTING SYSTEM</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
 
-            {/* Results Calculation Section */}
-            <div
-                className="relative z-10 mt-20 p-10 bg-white rounded-[3rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-100"
-            >
+            {/* Results Calculation Section - (Leaderboard) */}
+            <div className="relative z-10 mt-20 p-10 bg-white rounded-[3rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-100">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
@@ -216,19 +241,9 @@ export default function JuryDashboard() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {candidates
-                        .map(c => ({
-                            ...c,
-                            myScore: votedCandidates[c.id] || 0,
-                            // Simulate average from other 4 jury members (random 12-18 range)
-                            otherAvg: (Math.random() * 6 + 12),
-                            get globalAvg() {
-                                return (this.myScore + this.otherAvg * 4) / 5;
-                            }
-                        }))
-                        .sort((a, b) => b.globalAvg - a.globalAvg)
-                        .slice(0, 10)
-                        .map((winner, idx) => (
+                    {standings.slice(0, 10).map((winner, idx) => {
+                        const winPhoto = winner.competition_images?.[0]?.image || winner?.category?.image || "https://via.placeholder.com/800";
+                        return (
                             <div
                                 key={winner.id}
                                 className="flex items-center gap-6 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-md transition-all group"
@@ -241,20 +256,27 @@ export default function JuryDashboard() {
                                         {idx + 1}
                                     </div>
                                 </div>
-                                <div className="h-16 w-16 rounded-xl overflow-hidden shadow-sm group-hover:scale-110 transition-transform">
-                                    <img src={winner.photoUrl} className="w-full h-full object-cover" alt="" />
+                                <div className="h-16 w-16 rounded-xl overflow-hidden shadow-sm group-hover:scale-110 transition-transform bg-gray-200">
+                                    <img src={winPhoto} className="w-full h-full object-cover" alt="" />
                                 </div>
                                 <div className="flex-1">
-                                    <h4 className="font-bold text-gray-900 leading-tight">Submission #{winner.id.toString().padStart(4, '0')}</h4>
-                                    <div className="text-xs text-gray-500 uppercase tracking-wider">{winner.category}</div>
+                                    <h4 className="font-bold text-gray-900 leading-tight line-clamp-1">{winner.photo_title || `Submission #${winner.id}`}</h4>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className="text-[9px] bg-white border border-gray-200 text-gray-500 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                                            {winner.category?.name || "ART"}
+                                        </span>
+                                        <span className="text-[10px] text-gray-400 font-medium">by {winner.full_name || "Unknown Artist"}</span>
+                                    </div>
                                 </div>
                                 <div className="text-right">
-                                    <div className="text-2xl font-black text-gray-900 group-hover:text-[#d4af37] transition-colors">{winner.globalAvg.toFixed(1)}</div>
+                                    <div className="text-2xl font-black text-gray-900 group-hover:text-[#d4af37] transition-colors">
+                                        {(winner.percentage || 0).toFixed(1)}
+                                    </div>
                                     <div className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Avg Score</div>
                                 </div>
                             </div>
-                        ))
-                    }
+                        );
+                    })}
                 </div>
 
                 {progress < 100 && (
@@ -286,3 +308,4 @@ export default function JuryDashboard() {
         </div>
     );
 }
+
