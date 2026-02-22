@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosPublic, axiosPrivate } from "@/configs/axios.config";
 import toast from "react-hot-toast";
 import { useAuth } from "./AuthContext";
@@ -117,6 +117,67 @@ export const useGetUserInfo = () => {
             return res.data;
         },
         retry: false,
+    });
+};
+
+// Update Profile hook
+export const useUpdateProfile = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPrivate.post("/auth/update-profile", data, {
+                headers: {
+                    "Content-Type": undefined,
+                },
+                timeout: 30000,
+            });
+            return res.data;
+        },
+        onSuccess: (data) => {
+            if (data.status) {
+                toast.success(data.message || "Profile updated successfully");
+                queryClient.invalidateQueries({ queryKey: ["user-info"] });
+            } else {
+                toast.error(data.message || "Failed to update profile");
+            }
+        },
+        onError: (error) => {
+            const serverErrors = error.response?.data?.errors;
+            if (serverErrors) {
+                Object.values(serverErrors).flat().forEach((msg) => {
+                    toast.error(msg);
+                });
+            } else {
+                toast.error(error.response?.data?.message || "Profile update failed");
+            }
+        },
+    });
+};
+
+// Update Password hook
+export const useUpdatePassword = () => {
+    return useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosPrivate.post("/auth/update-password", data);
+            return res.data;
+        },
+        onSuccess: (data) => {
+            if (data.status) {
+                toast.success(data.message || "Password updated successfully");
+            } else {
+                toast.error(data.message || "Failed to update password");
+            }
+        },
+        onError: (error) => {
+            const serverErrors = error.response?.data?.errors;
+            if (serverErrors) {
+                Object.values(serverErrors).flat().forEach((msg) => {
+                    toast.error(msg);
+                });
+            } else {
+                toast.error(error.response?.data?.message || "Password update failed");
+            }
+        },
     });
 };
 

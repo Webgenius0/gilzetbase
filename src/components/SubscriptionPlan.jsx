@@ -1,8 +1,14 @@
 import React from "react";
 import image from "../assets/categories/category-bg.png";
 import BusinessSubscriptions from "./BusinessSubscriptions";
+import { useSearchParams } from "react-router";
 
 const SubscriptionPlan = () => {
+  const [searchParams] = useSearchParams();
+  const selectedPlanId = searchParams.get("plan")
+    ? Number(searchParams.get("plan"))
+    : null;
+
   const title = "AVA ART VISION AWARD";
   const subtitle = "Shape the future of digital experiences.";
   return (
@@ -22,7 +28,7 @@ const SubscriptionPlan = () => {
         </div>
       </div>
 
-      <BusinessSubscriptions />
+      <BusinessSubscriptions selectedPlanId={selectedPlanId} />
     </>
   );
 };

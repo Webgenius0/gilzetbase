@@ -26,6 +26,8 @@ import SubmitPhotoForm from "@/components/SubmitPhotoForm";
 import PasswordSettings from "@/pages/dashboard/ChangesPassword";
 import SubscriptionPlan from "@/components/SubscriptionPlan";
 import WinnerArchive from "@/pages/winnerarchive/WinnerArchive";
+import PaymentSuccess from "@/pages/payment/PaymentSuccess";
+import PaymentCancel from "@/pages/payment/PaymentCancel";
 
 // Jury Pages
 import JuryLayout from "@/layouts/jury/JuryLayout";
@@ -69,6 +71,14 @@ export const router = createBrowserRouter([
       {
         path: "subscription",
         element: <SubscriptionPlan />,
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "payment-cancel",
+        element: <PaymentCancel />,
       },
     ],
   },
