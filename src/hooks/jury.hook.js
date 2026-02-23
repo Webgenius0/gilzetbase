@@ -13,7 +13,50 @@ export const useGetScores = (page = 1) => {
     });
 };
 
-// Get specific score details
+// Get contest archive
+export const useGetContestArchive = (filters = {}) => {
+    const { year, month, category_id } = filters;
+    return useQuery({
+        queryKey: ["contest-archive", year, month, category_id],
+        queryFn: async () => {
+            let url = "/contest-archive";
+            const params = new URLSearchParams();
+            if (year) params.append("year", year);
+            if (month) params.append("month", month);
+            if (category_id) params.append("category_id", category_id);
+
+            if (params.toString()) {
+                url += `?${params.toString()}`;
+            }
+
+            const res = await axiosPrivate.get(url);
+            return res.data;
+        },
+    });
+};
+
+// Get Categories
+export const useGetCategories = () => {
+    return useQuery({
+        queryKey: ["categories"],
+        queryFn: async () => {
+            const res = await axiosPrivate.get("/category");
+            return res.data;
+        },
+    });
+};
+// Get contest archive details
+export const useGetContestArchiveDetails = (id) => {
+    return useQuery({
+        queryKey: ["contest-archive-details", id],
+        queryFn: async () => {
+            if (!id) return null;
+            const res = await axiosPrivate.get(`/contest-archive/${id}`);
+            return res.data;
+        },
+        enabled: !!id,
+    });
+};
 export const useGetScoreDetails = (competition_id) => {
     return useQuery({
         queryKey: ["jury-score-details", competition_id],

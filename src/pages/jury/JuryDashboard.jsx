@@ -242,7 +242,7 @@ export default function JuryDashboard() {
                         </div>
                         <p className="text-gray-500">Based on the current average from all jury members. Positions may shift until final validation.</p>
                     </div>
-                    <button
+                    {/* <button
                         disabled={progress < 100}
                         className={`px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 ${progress === 100
                             ? "bg-black text-white hover:scale-105 active:scale-95 shadow-xl shadow-black/20"
@@ -251,7 +251,7 @@ export default function JuryDashboard() {
                     >
                         Finalize & Submit Results
                         <ChevronRight size={20} />
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

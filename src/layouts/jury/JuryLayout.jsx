@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router";
+import { Outlet, Link, useNavigate } from "react-router";
 import JurySidebar from "./JurySidebar";
 import { useGetUserInfo, useLogout } from "@/hooks/auth.hook";
 import {
@@ -13,8 +13,16 @@ import { LogOut, User as UserIcon, Home, LayoutDashboard } from "lucide-react";
 
 export default function JuryLayout() {
     const { data: response } = useGetUserInfo();
-    const { mutate: logout } = useLogout();
+    const { mutate: logoutMutate } = useLogout();
+    const navigate = useNavigate();
     const user = response?.data;
+
+    const handleLogout = () => {
+        logoutMutate(null, {
+            onSuccess: () => navigate("/"),
+            onError: () => navigate("/"),
+        });
+    };
 
     return (
         <div className="flex min-h-screen bg-[#f5f6fa]">
@@ -64,7 +72,7 @@ export default function JuryLayout() {
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
-                                onClick={() => logout()}
+                                onClick={handleLogout}
                                 className="text-red-600 focus:text-red-600 cursor-pointer"
                             >
                                 <LogOut size={16} className="mr-2" />

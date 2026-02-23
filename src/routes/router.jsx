@@ -33,6 +33,7 @@ import PaymentCancel from "@/pages/payment/PaymentCancel";
 import JuryLayout from "@/layouts/jury/JuryLayout";
 import JuryDashboard from "@/pages/jury/JuryDashboard";
 import JuryArchive from "@/pages/jury/JuryArchive";
+import JuryArchiveDetails from "@/pages/jury/JuryArchiveDetails";
 import JuryProfile from "@/pages/jury/JuryProfile";
 import JuryPhotoDetails from "@/pages/jury/JuryPhotoDetails";
 
@@ -117,6 +118,7 @@ export const router = createBrowserRouter([
       { path: "dashboard", element: <JuryDashboard /> },
       { path: "dashboard/:id", element: <JuryPhotoDetails /> },
       { path: "archive", element: <JuryArchive /> },
+      { path: "archive/:id", element: <JuryArchiveDetails /> },
       { path: "profile", element: <JuryProfile /> },
     ],
   },

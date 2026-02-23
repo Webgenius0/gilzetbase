@@ -66,7 +66,14 @@ export default function DashboardLayout() {
 
   const handleLogout = () => {
     setDropdownOpen(false);
-    logoutMutate();
+    logoutMutate(null, {
+      onSuccess: () => {
+        navigate("/");
+      },
+      onError: () => {
+        navigate("/");
+      }
+    });
   };
 
   return (
