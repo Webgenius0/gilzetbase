@@ -119,7 +119,7 @@ const LoginDialog = ({ switchToRegister, switchToForgot, onClose }) => {
         </div>
 
         {/* Google Login */}
-        <button
+        {/* <button
           type="button"
           className="w-full h-12 flex items-center justify-center gap-3 bg-white border border-[#E5E5E5] rounded-xl hover:bg-gray-50 transition-colors shadow-sm"
         >
@@ -139,7 +139,7 @@ const LoginDialog = ({ switchToRegister, switchToForgot, onClose }) => {
           <span className="relative bg-[#FFFCF7] px-4 text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">
             or
           </span>
-        </div>
+        </div> */}
 
         <button
           type="submit"

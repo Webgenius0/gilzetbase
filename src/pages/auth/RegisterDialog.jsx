@@ -43,7 +43,7 @@ const RegisterDialog = ({ switchToLogin, switchOTPVerification }) => {
       email: data.email,
       password: data.password,
       password_confirmation: data.confirmPassword,
-     // role: data.role,
+      // role: data.role,
     };
 
     registerUser(payload, {
@@ -134,12 +134,12 @@ const RegisterDialog = ({ switchToLogin, switchOTPVerification }) => {
             type="email"
             className="w-full h-12 px-4 bg-white border border-[#E5E5E5] rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-[#c89d3e]/20 focus:border-[#c89d3e] transition-all"
             placeholder="Enter your email address"
-            {...register("email", { 
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address"
-                }
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address"
+              }
             })}
           />
           {errors.email && (
@@ -208,7 +208,7 @@ const RegisterDialog = ({ switchToLogin, switchOTPVerification }) => {
         </div>
 
         {/* Google Login */}
-        <button
+        {/* <button
           type="button"
           className="w-full h-12 flex items-center justify-center gap-3 bg-white border border-[#E5E5E5] rounded-xl hover:bg-gray-50 transition-colors shadow-sm"
         >
@@ -240,7 +240,7 @@ const RegisterDialog = ({ switchToLogin, switchOTPVerification }) => {
           <span className="relative bg-[#FFFCF7] px-4 text-xs font-medium text-[#A0A0A0] uppercase tracking-wider">
             or
           </span>
-        </div>
+        </div> */}
 
         {/* Terms and Conditions */}
         <div className="flex items-start gap-3">
