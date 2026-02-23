@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import BottomDotSvg from "@/assets/svg/BottomDotSvg";
 import RoundSvg from "@/assets/svg/RoundSvg";
+import { Link } from "react-router";
+import { useAuth } from "@/hooks/AuthContext";
+import AuthDialog from "@/pages/auth/AuthDialog";
 
 const carouselImages = [
   "https://avatars.mds.yandex.net/get-shedevrum/15102269/img_766586fdd70311efb2d5caf2840a7b5b/orig",
@@ -15,6 +18,7 @@ const carouselImages = [
 ];
 
 const HomeHero = () => {
+  const { isAuthenticated } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -101,12 +105,33 @@ const HomeHero = () => {
           </h1>
 
           <div className="flex gap-5">
-            <Button className="bg-[#CAA844] text-white hover:bg-white hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest font-bold transition-all duration-300">
-              Submit a Photo
-            </Button>
-            <Button variant="outline" className="border-[#CAA844]/40 text-[#CAA844] bg-transparent hover:bg-[#CAA844] hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest transition-all duration-300">
-              Create Account
-            </Button>
+            {!isAuthenticated ? (
+              <AuthDialog initialMode="login">
+                <Button className="bg-[#CAA844] text-white hover:bg-white hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest font-bold transition-all duration-300">
+                  Submit a Photo
+                </Button>
+              </AuthDialog>
+            ) : (
+              <Link to="/submit-photo">
+                <Button className="bg-[#CAA844] text-white hover:bg-white hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest font-bold transition-all duration-300">
+                  Submit a Photo
+                </Button>
+              </Link>
+            )}
+
+            {!isAuthenticated ? (
+              <AuthDialog initialMode="register">
+                <Button variant="outline" className="border-[#CAA844]/40 text-[#CAA844] bg-transparent hover:bg-[#CAA844] hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest transition-all duration-300">
+                  Create Account
+                </Button>
+              </AuthDialog>
+            ) : (
+              <Link to="/dashboard">
+                <Button variant="outline" className="border-[#CAA844]/40 text-[#CAA844] bg-transparent hover:bg-[#CAA844] hover:text-black px-5 py-5 rounded-[7px] text-[11px] uppercase tracking-widest transition-all duration-300">
+                  Dashboard
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
 
@@ -159,7 +184,7 @@ const HomeHero = () => {
         <div className="absolute left-[35%] top-[70%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] mix-blend-screen hidden lg:block" />
         <div className="absolute right-[2%] top-[40%] w-[300px] h-[300px] rounded-full bg-[rgba(216,208,90,0.85)] opacity-20 blur-[64px] mix-blend-screen  -z-10 hidden lg:block" />
       </div>
-    </section>
+    </section >
   );
 };
 

@@ -6,28 +6,32 @@ import ForgotPasswordDialog from "./ForgotPasswordDialog";
 import OTPVerificationDialog from "./OTPVerificationDialog";
 import SetNewPasswordDialog from "./SetNewPasswordDialog";
 
-const AuthDialog = () => {
+const AuthDialog = ({ children, initialMode = "login" }) => {
   const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState("login");
+  const [mode, setMode] = useState(initialMode);
   const [email, setEmail] = useState("");
 
   const handleOpenStatus = (status) => {
     setOpen(status);
     if (!status) {
-      // Reset mode to login when closing
-      setTimeout(() => setMode("login"), 300);
+      // Reset mode to initialMode when closing
+      setTimeout(() => setMode(initialMode), 300);
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenStatus}>
       <DialogTrigger asChild>
-        <button
-          onClick={() => setMode("login")}
-          className="bg-transparent border border-[#CAA844] px-6 py-2 rounded-full text-[#CAA844] text-base font-bold cursor-pointer hover:bg-[#CAA844] hover:text-white transition-all active:scale-95"
-        >
-          Login / Register
-        </button>
+        {children ? (
+          children
+        ) : (
+          <button
+            onClick={() => setMode("login")}
+            className="bg-transparent border border-[#CAA844] px-6 py-2 rounded-full text-[#CAA844] text-base font-bold cursor-pointer hover:bg-[#CAA844] hover:text-white transition-all active:scale-95"
+          >
+            Login / Register
+          </button>
+        )}
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-lg lg:max-w-xl p-0 border-none bg-transparent shadow-none overflow-hidden">
