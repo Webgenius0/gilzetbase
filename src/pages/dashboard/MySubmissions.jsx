@@ -3,7 +3,7 @@ import { Search, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useGetCompetitions } from "@/hooks/competition.hook";
 
 const MySubmissions = () => {
@@ -74,6 +74,14 @@ const MySubmissions = () => {
             <p className="text-sm text-gray-600">
               View and manage your photography contest submissions
             </p>
+            <div>
+
+              <Link to="/affiliate">
+                <button className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg">
+                  Join as affilate
+                </button>
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col items-end gap-2">
             <div className="bg-amber-100 border border-amber-200 rounded-lg p-3 flex items-center gap-4">

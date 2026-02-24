@@ -84,7 +84,7 @@ const RegisterDialog = ({ switchToLogin, switchOTPVerification }) => {
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent className="bg-white border-[#E5E5E5]">
-                  <SelectItem value="Visitor">Visitor</SelectItem>
+                  {/* <SelectItem value="Visitor">Visitor</SelectItem> */}
                   <SelectItem value="Photographer">Photographer</SelectItem>
                   <SelectItem value="Judge">Judge</SelectItem>
                 </SelectContent>
