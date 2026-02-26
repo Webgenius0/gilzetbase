@@ -144,18 +144,18 @@ export const router = createBrowserRouter([
   },
 
   // 👑 ADMIN PANEL
-  {
-    path: "/admin",
-    element: <AdminLayout />,
-    children: [
-      { path: "dashboard", element: <AdminAffiliateList /> }, // Temporary placeholder
-      { path: "affiliates", element: <AdminAffiliateList /> },
-      { path: "commissions", element: <AdminAffiliateList /> }, // Temporary placeholder
-      { path: "payouts", element: <AdminAffiliateList /> }, // Temporary placeholder
-      { path: "analytics", element: <AdminAffiliateList /> }, // Temporary placeholder
-      { path: "settings", element: <AdminAffiliateList /> }, // Temporary placeholder
-    ]
-  },
+  // {
+  //   path: "/admin",
+  //   element: <AdminLayout />,
+  //   children: [
+  //     { path: "dashboard", element: <AdminAffiliateList /> }, // Temporary placeholder
+  //     { path: "affiliates", element: <AdminAffiliateList /> },
+  //     { path: "commissions", element: <AdminAffiliateList /> }, // Temporary placeholder
+  //     { path: "payouts", element: <AdminAffiliateList /> }, // Temporary placeholder
+  //     { path: "analytics", element: <AdminAffiliateList /> }, // Temporary placeholder
+  //     { path: "settings", element: <AdminAffiliateList /> }, // Temporary placeholder
+  //   ]
+  // },
 
   // ❌ 404 PAGE
   {
